@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <div class="pb-3">
+        <h4>Delete Contact</h4>
+        <form action="" method="post">
+            {% csrf_token %}
+            <p>Are you sure you want to the following contact?</p>
+            <ul>
+                <li><strong>First name: </strong>{{ contact.first_name }}</li>
+                <li><strong>Last name: </strong>{{ contact.last_name }}</li>
+                <li><strong>Nickname: </strong>{{ contact.nickname }}</li>
+                <li><strong>Address: </strong>{{ contact.postal_address }}</li>
+                <li><strong>Phone: </strong>{{ contact.phone_number }}</li>
+                <li><strong>Email: </strong>{{ contact.email_address }}</li>
+                <li><strong>LinkedIn: </strong>{{ contact.linkedin_url }}</li>
+                <li><strong>Twitter: </strong>{{ contact.twitter_url }}</li>
+                <li><strong>Website: </strong>{{ contact.personal_website }}</li>
+                <li><strong>Created: </strong>{{ contact.created_on }}</li>
+                <li><strong>Last modified: </strong>{{ contact.last_modified_on }}</li>
+            </ul>
+            <button type="submit">Confirm</button>
+            <a href="{% url 'contact_list' %}">Cancel</a>
+        </form>
+    </div>
+
+{% endblock content %}
