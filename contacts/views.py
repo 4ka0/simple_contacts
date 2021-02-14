@@ -1,56 +1,52 @@
-from django.views.generic import (
-    ListView, DetailView, CreateView, UpdateView, DeleteView
-)
 from django.urls import reverse_lazy
+from django.shortcuts import render, redirect, get_object_or_404
 
 from .models import Contact
+from .forms import ContactForm
 
 
-class ContactListView(ListView):
-    model = Contact
-    template_name = 'contact_list.html'
+def contact_list(request):
+    contacts = Contact.objects.all()
+    return render(request, 'contact_list.html', {'contacts': contacts})
 
 
-class ContactCreateView(CreateView):
-    model = Contact
-    fields = (
-        'first_name',
-        'last_name',
-        'nickname',
-        'postal_address',
-        'phone_number',
-        'email_address',
-        'linkedin_url',
-        'twitter_url',
-        'personal_website'
-    )
-    template_name = 'contact_new.html'
-    success_url = reverse_lazy('contact_list')
+def contact_detail(request, pk):
+    contact = get_object_or_404(Contact, pk=pk)
+    return render(request, 'contact_detail.html', {'contact': contact})
 
 
-class ContactUpdateView(UpdateView):
-    model = Contact
-    fields = (
-        'first_name',
-        'last_name',
-        'nickname',
-        'postal_address',
-        'phone_number',
-        'email_address',
-        'linkedin_url',
-        'twitter_url',
-        'personal_website'
-    )
-    template_name = 'contact_edit.html'
-    # success_url = reverse_lazy('contact_list')
+def contact_new(request):
+
+    if request.method == "POST":
+        form = ContactForm(request.POST)
+        if form.is_valid:
+            contact = form.save()
+            return redirect('contact_detail', pk=contact.pk)
+
+    else:
+        form = ContactForm()
+    return render(request, 'contact_new.html', {'form': form})
 
 
-class ContactDeleteView(DeleteView):
-    model = Contact
-    template_name = 'contact_delete.html'
-    success_url = reverse_lazy('contact_list')
+def contact_edit(request, pk):
+    contact = get_object_or_404(Contact, pk=pk)
+
+    if request.method == "POST":
+        form = ContactForm(request.POST, instance=contact)
+        if form.is_valid():
+            contact = form.save()
+            return redirect('contact_detail', pk=contact.pk)
+
+    else:
+        form = ContactForm(instance=contact)
+    return render(request, 'contact_edit.html', {'form': form})
 
 
-class ContactDetailView(DetailView):
-    model = Contact
-    template_name = 'contact_detail.html'
+def contact_delete(request, pk):
+    contact = get_object_or_404(Contact, pk=pk)
+
+    if request.method == 'POST':
+        contact.delete()
+        return redirect('contact_list')
+
+    return render(request, 'contact_delete.html', {'contact': contact})
