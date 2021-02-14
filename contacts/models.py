@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+from django.utils import timezone
 
 
 class Contact(models.Model):
@@ -13,7 +14,7 @@ class Contact(models.Model):
     twitter_url = models.URLField(max_length=200, blank=True)
     personal_website = models.URLField(max_length=200, blank=True)
     created_on = models.DateField(auto_now_add=True)
-    last_modified_on = models.DateField(auto_now_add=True)
+    last_modified_on = models.DateField(timezone.now())
 
     class Meta:
         verbose_name_plural = 'contacts'
@@ -22,4 +23,4 @@ class Contact(models.Model):
         return f'{self.first_name} {self.last_name}'
 
     def get_absolute_url(self):
-        return reverse('contact_detail', args=[str(self.id)])
+        return reverse('contact_detail', args=[str(self.pk)])

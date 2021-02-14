@@ -1,4 +1,4 @@
-from django.urls import reverse_lazy
+from django.utils import timezone
 from django.shortcuts import render, redirect, get_object_or_404
 
 from .models import Contact
@@ -34,7 +34,9 @@ def contact_edit(request, pk):
     if request.method == "POST":
         form = ContactForm(request.POST, instance=contact)
         if form.is_valid():
-            contact = form.save()
+            contact = form.save(commit=False)
+            contact.last_modified_on = timezone.now()
+            contact.save()
             return redirect('contact_detail', pk=contact.pk)
 
     else:
