@@ -10,6 +10,11 @@ def contact_list(request):
     return render(request, 'contact_list.html', {'contacts': contacts})
 
 
+def contact_alphabet(request, letter):
+    contacts = Contact.objects.filter(first_name__istartswith=letter)
+    return render(request, 'contact_list.html', {'contacts': contacts})
+
+
 def contact_detail(request, pk):
     contact = get_object_or_404(Contact, pk=pk)
     return render(request, 'contact_detail.html', {'contact': contact})

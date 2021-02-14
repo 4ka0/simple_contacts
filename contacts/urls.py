@@ -5,6 +5,7 @@ from . import views
 
 urlpatterns = [
     path('', views.contact_list, name='contact_list'),
+    path('<str:letter>/', views.contact_alphabet, name='contact_alphabet'),
     path('new/', views.contact_new, name='contact_new'),
     path('<int:pk>/', views.contact_detail, name='contact_detail'),
     path('<int:pk>/edit/', views.contact_edit, name='contact_edit'),

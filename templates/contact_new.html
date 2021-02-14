@@ -4,7 +4,7 @@
 
     <div class="pb-3">
         <h4>New Contact</h4>
-        <form action="" method="post">
+        <form action="" method="POST">
             {% csrf_token %}
             {{ form.as_p }}
             <button type="submit">Save</button>
