@@ -15,5 +15,6 @@ class ContactForm(forms.ModelForm):
             'email_address',
             'linkedin_url',
             'twitter_url',
+            'github_url',
             'personal_website'
         )

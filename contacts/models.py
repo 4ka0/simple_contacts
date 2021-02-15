@@ -7,14 +7,15 @@ class Contact(models.Model):
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
     nickname = models.CharField(max_length=50, blank=True)
-    postal_address = models.CharField(max_length=100, blank=True)
+    postal_address = models.CharField(max_length=200, blank=True)
     phone_number = models.CharField(max_length=50, blank=True)
-    email_address = models.EmailField(max_length=250, blank=True)
-    linkedin_url = models.URLField(max_length=200, blank=True)
-    twitter_url = models.URLField(max_length=200, blank=True)
-    personal_website = models.URLField(max_length=200, blank=True)
-    created_on = models.DateField(auto_now_add=True)
-    last_modified_on = models.DateField(timezone.now())
+    email_address = models.EmailField(max_length=200, blank=True)
+    linkedin_url = models.URLField(blank=True)
+    twitter_url = models.URLField(blank=True)
+    github_url = models.URLField(blank=True)
+    personal_website = models.URLField(blank=True)
+    created_on = models.DateTimeField(auto_now_add=True, null=True)
+    last_modified_on = models.DateTimeField(timezone.now(), null=True)
 
     class Meta:
         verbose_name_plural = 'contacts'

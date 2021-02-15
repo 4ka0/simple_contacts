@@ -15,11 +15,11 @@
             <div class="row justify-content-center">
                 <div class="col-7 px-5 py-4 mt-5 rounded bg-white outline">
 
-                    <nav class="navbar">
-                        <form class="form-inline">
-                            <a href="{% url 'contact_list' %}">All Contacts</a> &middot;
-                            <a href="{% url 'contact_new' %}">New Contact</a>
-                        </form>
+                    <nav class="navbar navbar-light navbar-color my-2">
+                        <div class="float-right">
+                            <a class="btn btn-outline-primary" role="button" href="{% url 'contact_list' %}">All Contacts</a>
+                            <a class="btn btn-outline-primary" role="button" href="{% url 'contact_new' %}">New Contact</a>
+                        </div>
                     </nav>
 
                     {% block content %}
