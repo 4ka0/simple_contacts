@@ -39,6 +39,7 @@
             <tbody>
 
                 {% for contact in contacts %}
+
                     <tr>
                         <td style="width: 50%">
                             <a href="{% url 'contact_detail' contact.pk %}">
@@ -51,6 +52,11 @@
                             <a href="{% url 'contact_delete' contact.pk %}">Delete</a>
                         </td>
                     </tr>
+
+                {% empty %}
+
+                    <p>No contacts found.</p>
+
                 {% endfor %}
 
             </tbody>
