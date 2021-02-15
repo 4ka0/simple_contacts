@@ -2,11 +2,15 @@ from django import forms
 
 from .models import Contact
 
+# from image_cropping import ImageCropWidget
+
 
 class ContactForm(forms.ModelForm):
     class Meta:
         model = Contact
         fields = (
+            'profile_picture',
+            'cropping',
             'first_name',
             'last_name',
             'nickname',
@@ -18,3 +22,8 @@ class ContactForm(forms.ModelForm):
             'github_url',
             'personal_website'
         )
+        """
+        widgets = {
+            'profile_picture': ImageCropWidget,
+        }
+        """

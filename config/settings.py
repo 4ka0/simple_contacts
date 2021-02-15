@@ -10,7 +10,12 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
+
+import os
 from pathlib import Path
+
+from easy_thumbnails.conf import Settings as thumbnail_settings
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -38,7 +43,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    # local
     'contacts',
+
+    # third-party
+    'easy_thumbnails',
+    'image_cropping',
 ]
 
 MIDDLEWARE = [
@@ -120,4 +130,24 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
 STATICFILES_DIRS = [str(BASE_DIR.joinpath('static'))]
+
+
+# User-uploaded files
+
+MEDIA_URL = '/media/'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+
+# Image cropping
+
+THUMBNAIL_PROCESSORS = (
+    'image_cropping.thumbnail_processors.crop_corners',
+) + thumbnail_settings.THUMBNAIL_PROCESSORS
+
+IMAGE_CROPPING_THUMB_SIZE = (200, 200)
+
+IMAGE_CROPPING_BACKEND = 'image_cropping.backends.easy_thumbs.EasyThumbnailsBackend'
+IMAGE_CROPPING_BACKEND_PARAMS = {}

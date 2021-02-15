@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 
+{% load cropping %}
+
 {% block content %}
 
     <nav class="navbar mb-3">
@@ -41,13 +43,19 @@
                 {% for contact in contacts %}
 
                     <tr>
-                        <td style="width: 50%">
+                        <td style="width: 10%">
+                            <a href="{% url 'contact_detail' contact.pk %}">
+                                <img class="display-img" src="{% cropped_thumbnail contact 'cropping' scale=0.2 %}">
+                            </a>
+                        </td>
+
+                        <td style="width: 50%" class="align-middle">
                             <a href="{% url 'contact_detail' contact.pk %}">
                                 {{ contact.first_name }} {{ contact.last_name }}
                             </a>
                         </td>
 
-                        <td style="width: 50%">
+                        <td style="width: 40%" class="align-middle">
                             <a href="{% url 'contact_edit' contact.pk %}">Edit</a> &middot;
                             <a href="{% url 'contact_delete' contact.pk %}">Delete</a>
                         </td>

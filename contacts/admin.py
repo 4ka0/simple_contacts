@@ -1,5 +1,11 @@
 from django.contrib import admin
+
 from .models import Contact
 
+from image_cropping import ImageCroppingMixin
 
-admin.site.register(Contact)
+
+class ContactAdmin(ImageCroppingMixin, admin.ModelAdmin):
+    pass
+
+admin.site.register(Contact, ContactAdmin)
