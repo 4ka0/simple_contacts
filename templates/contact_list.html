@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 
+{% load thumbnail %}
+
 {% block content %}
 
     <nav class="navbar mb-3">
@@ -42,6 +44,11 @@
 
                     <tr>
                         <td style="width: 10%">
+
+                            {% thumbnail item.image "100x100" crop="center" as im %}
+                                <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
+                            {% endthumbnail %}
+
                             <a href="{% url 'contact_detail' contact.pk %}">
                                 <img src="{{ contact.profile_picture.url }}" alt="Profile picture" class="display-img" >
                             </a>

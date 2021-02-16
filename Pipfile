@@ -11,6 +11,8 @@ django = "*"
 pylint-django = "*"
 django-crispy-forms = "*"
 django-image-cropping = "*"
+sorl-thumbnail = "*"
+pillow = "*"
 
 [requires]
 python_version = "3.7"
