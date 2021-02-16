@@ -142,6 +142,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Image cropping
 
+"""
 from easy_thumbnails.conf import Settings as thumbnail_settings
 
 THUMBNAIL_PROCESSORS = (
@@ -149,8 +150,11 @@ THUMBNAIL_PROCESSORS = (
 ) + thumbnail_settings.THUMBNAIL_PROCESSORS
 
 IMAGE_CROPPING_THUMB_SIZE = (200, 200)
+"""
 
-# IMAGE_CROPPING_BACKEND = 'image_cropping.backends.easy_thumbs.EasyThumbnailsBackend'
-# IMAGE_CROPPING_BACKEND_PARAMS = {}
+"""
+IMAGE_CROPPING_BACKEND = 'image_cropping.backends.easy_thumbs.EasyThumbnailsBackend'
+IMAGE_CROPPING_BACKEND_PARAMS = {}
 
-# IMAGE_CROPPING_JQUERY_URL = 'admin/js/vendor/jquery/jquery.js'
+IMAGE_CROPPING_JQUERY_URL = 'admin/js/vendor/jquery/jquery.js'
+"""

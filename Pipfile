@@ -9,8 +9,6 @@ pylint = "*"
 [packages]
 django = "*"
 pylint-django = "*"
-django-image-cropping = "*"
-easy-thumbnails = "*"
 django-crispy-forms = "*"
 
 [requires]

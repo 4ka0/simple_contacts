@@ -12,7 +12,7 @@ class ContactForm(forms.ModelForm):
 
         fields = (
             'profile_picture',
-            'cropping',
+            # 'cropping',
             'first_name',
             'last_name',
             'nickname',

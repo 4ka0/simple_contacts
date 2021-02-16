@@ -2,14 +2,14 @@ from django.db import models
 from django.urls import reverse
 from django.utils import timezone
 
-from image_cropping import ImageCropField
-from image_cropping import ImageRatioField
+# from image_cropping import ImageCropField
+# from image_cropping import ImageRatioField
 
 
 class Contact(models.Model):
 
-    profile_picture = ImageCropField(blank=True, upload_to='images')
-    cropping = ImageRatioField('profile_picture', '200x200')
+    profile_picture = models.ImageField(blank=True, upload_to='images')
+    # cropping = ImageRatioField('profile_picture', '200x200')
 
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
