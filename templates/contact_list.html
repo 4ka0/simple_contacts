@@ -1,7 +1,5 @@
 {% extends 'base.html' %}
 
-{% load cropping %}
-
 {% block content %}
 
     <nav class="navbar mb-3">
@@ -45,7 +43,7 @@
                     <tr>
                         <td style="width: 10%">
                             <a href="{% url 'contact_detail' contact.pk %}">
-                                <img class="display-img" src="{% cropped_thumbnail contact 'cropping' scale=0.2 %}">
+                                <img src="{{ contact.profile_picture.url }}" alt="Profile picture" class="display-img" >
                             </a>
                         </td>
 

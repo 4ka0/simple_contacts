@@ -9,7 +9,7 @@
             <tr>
               <th scope="row">Picture:</th>
               <td>
-                <img class="display-img" src="{% cropped_thumbnail contact 'cropping' scale=0.75 %}">
+                <img src="{{ contact.profile_picture.url }}" alt="Profile picture" class="display-img" >
               </td>
             </tr>
 

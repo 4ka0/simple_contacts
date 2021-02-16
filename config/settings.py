@@ -45,8 +45,6 @@ INSTALLED_APPS = [
     'contacts',
 
     # third-party
-    'easy_thumbnails',
-    'image_cropping',
     'crispy_forms',
 ]
 
@@ -140,21 +138,3 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 
-# Image cropping
-
-"""
-from easy_thumbnails.conf import Settings as thumbnail_settings
-
-THUMBNAIL_PROCESSORS = (
-    'image_cropping.thumbnail_processors.crop_corners',
-) + thumbnail_settings.THUMBNAIL_PROCESSORS
-
-IMAGE_CROPPING_THUMB_SIZE = (200, 200)
-"""
-
-"""
-IMAGE_CROPPING_BACKEND = 'image_cropping.backends.easy_thumbs.EasyThumbnailsBackend'
-IMAGE_CROPPING_BACKEND_PARAMS = {}
-
-IMAGE_CROPPING_JQUERY_URL = 'admin/js/vendor/jquery/jquery.js'
-"""
