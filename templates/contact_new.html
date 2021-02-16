@@ -1,17 +1,99 @@
 {% extends 'base.html' %}
 
+{% load crispy_forms_tags %}
 {% load cropping %}
+
+{% block head_mixin %}
+    {{ form.media }}
+{% endblock head_mixin %}
 
 {% block content %}
 
     <div class="pb-3">
+
         <h4>New Contact</h4>
-        <form action="" method="POST">
+
+        <form action="" method="POST" enctype="multipart/form-data">
             {% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit">Save</button>
-            <a href="{% url 'contact_list' %}">Cancel</a>
+
+
+            <div class="form-group mb-3">
+                {{ form.profile_picture|as_crispy_field }}
+            </div>
+
+
+
+            <div class="form-group mb-3">
+                {{ form.cropping|as_crispy_field }}
+            </div>
+
+
+
+            <div class="form-group mb-3">
+                {{ form.first_name|as_crispy_field }}
+            </div>
+
+
+
+            <div class="form-group mb-3">
+                {{ form.last_name|as_crispy_field }}
+            </div>
+
+
+
+            <div class="form-group mb-3">
+                {{ form.nickname|as_crispy_field }}
+            </div>
+
+
+
+            <div class="form-group mb-3">
+                {{ form.postal_address|as_crispy_field }}
+            </div>
+
+
+
+            <div class="form-group mb-3">
+                {{ form.phone_number|as_crispy_field }}
+            </div>
+
+
+
+            <div class="form-group mb-3">
+                {{ form.email_address|as_crispy_field }}
+            </div>
+
+
+
+            <div class="form-group mb-3">
+                {{ form.linkedin_url|as_crispy_field }}
+            </div>
+
+
+
+            <div class="form-group mb-3">
+                {{ form.twitter_url|as_crispy_field }}
+            </div>
+
+
+
+            <div class="form-group mb-3">
+                {{ form.github_url|as_crispy_field }}
+            </div>
+
+
+
+            <div class="form-group mb-4">
+                {{ form.personal_website|as_crispy_field }}
+            </div>
+
+
+            <button type="submit" class="btn btn-outline-primary mr-3">Save</button>
+
+            <a class="btn btn-outline-primary" role="button" href="{% url 'contact_list' %}">Cancel</a>
+
         </form>
+
     </div>
 
 {% endblock content %}

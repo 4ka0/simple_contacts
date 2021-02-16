@@ -14,8 +14,6 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 import os
 from pathlib import Path
 
-from easy_thumbnails.conf import Settings as thumbnail_settings
-
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -49,6 +47,7 @@ INSTALLED_APPS = [
     # third-party
     'easy_thumbnails',
     'image_cropping',
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
@@ -143,11 +142,15 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Image cropping
 
+from easy_thumbnails.conf import Settings as thumbnail_settings
+
 THUMBNAIL_PROCESSORS = (
     'image_cropping.thumbnail_processors.crop_corners',
 ) + thumbnail_settings.THUMBNAIL_PROCESSORS
 
 IMAGE_CROPPING_THUMB_SIZE = (200, 200)
 
-IMAGE_CROPPING_BACKEND = 'image_cropping.backends.easy_thumbs.EasyThumbnailsBackend'
-IMAGE_CROPPING_BACKEND_PARAMS = {}
+# IMAGE_CROPPING_BACKEND = 'image_cropping.backends.easy_thumbs.EasyThumbnailsBackend'
+# IMAGE_CROPPING_BACKEND_PARAMS = {}
+
+# IMAGE_CROPPING_JQUERY_URL = 'admin/js/vendor/jquery/jquery.js'

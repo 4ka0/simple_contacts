@@ -36,7 +36,7 @@
     </nav>
 
     <div class="table-responsive">
-        <table class="table table-bordered">
+        <table class="table">
 
             <tbody>
 
@@ -49,15 +49,22 @@
                             </a>
                         </td>
 
-                        <td style="width: 50%" class="align-middle">
+                        <td style="width: 60%" class="align-middle">
                             <a href="{% url 'contact_detail' contact.pk %}">
                                 {{ contact.first_name }} {{ contact.last_name }}
                             </a>
+                            {% if contact.nickname %}
+                                <span class="text-gray">
+                                    &nbsp({{ contact.nickname }})
+                                </span>
+                            {% endif %}
                         </td>
 
-                        <td style="width: 40%" class="align-middle">
-                            <a href="{% url 'contact_edit' contact.pk %}">Edit</a> &middot;
-                            <a href="{% url 'contact_delete' contact.pk %}">Delete</a>
+                        <td style="width: 30%" class="align-middle">
+
+                            <a class="btn btn-sm btn-outline-primary" role="button" href="{% url 'contact_edit' contact.pk %}">Edit</a>
+                            <a class="btn btn-sm btn-outline-danger" role="button" href="{% url 'contact_delete' contact.pk %}">Delete</a>
+
                         </td>
                     </tr>
 
