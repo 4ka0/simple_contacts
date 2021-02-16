@@ -4,6 +4,7 @@ from .models import Contact
 
 
 class ContactForm(forms.ModelForm):
+
     class Meta:
 
         model = Contact
@@ -19,5 +20,5 @@ class ContactForm(forms.ModelForm):
             'linkedin_url',
             'twitter_url',
             'github_url',
-            'personal_website'
+            'personal_website',
         )

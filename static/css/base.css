@@ -2,8 +2,15 @@ html {
     background-color: #F8F9FA;
 }
 
-.display-img {
-    border-radius: 50%;}
+.list-img {
+    border-radius: 50%;
+    width: 50px;
+}
+
+.detail-img {
+    border-radius: 50%;
+    width: 100px;
+}
 
 .main-background {
     background-color: #F8F9FA;

@@ -23,7 +23,7 @@ def contact_detail(request, pk):
 def contact_new(request):
 
     if request.method == "POST":
-        form = ContactForm(request.POST)
+        form = ContactForm(request.POST, request.FILES)
         if form.is_valid:
             contact = form.save()
             return redirect('contact_detail', pk=contact.pk)

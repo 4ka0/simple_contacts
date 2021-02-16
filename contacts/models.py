@@ -5,7 +5,7 @@ from django.utils import timezone
 
 class Contact(models.Model):
 
-    profile_picture = models.ImageField(upload_to='images', blank=True, null=True)
+    profile_picture = models.ImageField(upload_to='images/', blank=True)
 
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
@@ -31,3 +31,9 @@ class Contact(models.Model):
 
     def get_absolute_url(self):
         return reverse('contact_detail', args=[str(self.pk)])
+
+    def get_profile_picture_url(self):
+        if self.profile_picture:
+            return self.profile_picture.url
+        else:
+            return 'static/images/default_profile_image.png'

@@ -1,156 +1,162 @@
 {% extends 'base.html' %}
 
+{% load static %}
+
 {% block content %}
 
-    <div class="table-responsive py-3">
-        <table class="table table-bordered">
-          <tbody>
+        <div class="table-responsive py-3">
+                <table class="table table-bordered">
+                    <tbody>
 
-            <tr>
-              <th scope="row">Picture:</th>
-              <td>
-                <img src="{{ contact.profile_picture.url }}" alt="Profile picture" class="display-img" >
-              </td>
-            </tr>
+                        <tr>
+                            <th scope="row">Picture:</th>
+                            <td>
+                                {% if contact.profile_picture %}
+                                    <img src="{{ contact.profile_picture.url }}" alt="Profile picture" class="detail-img" >
+                                {% else %}
+                                    <img src="{% static 'images/default_profile_image.png' %}" alt="Profile picture" class="detail-img" >
+                                {% endif %}
+                            </td>
+                        </tr>
 
-            <tr>
-              <th scope="row">Name:</th>
-              <td>{{ contact.first_name }} {{ contact.last_name }}</td>
-            </tr>
+                        <tr>
+                            <th scope="row">Name:</th>
+                            <td>{{ contact.first_name }} {{ contact.last_name }}</td>
+                        </tr>
 
-            <tr>
-              <th scope="row">Nickname:</th>
-              <td>
-                {% if contact.nickname %}
-                  {{ contact.nickname }}
-                {% else %}
-                  <div class="text-gray">
-                    None
-                  </div>
-                {% endif %}
-              </td>
-            </tr>
+                        <tr>
+                            <th scope="row">Nickname:</th>
+                            <td>
+                                {% if contact.nickname %}
+                                    {{ contact.nickname }}
+                                {% else %}
+                                    <div class="text-gray">
+                                        None
+                                    </div>
+                                {% endif %}
+                            </td>
+                        </tr>
 
-            <tr>
-              <th scope="row">Address:</th>
-                <td>
-                  {% if contact.postal_address %}
-                    {{ contact.postal_address }}
-                  {% else %}
-                    <div class="text-gray">
-                      None
-                    </div>
-                  {% endif %}
-                </td>
-            </tr>
+                        <tr>
+                            <th scope="row">Address:</th>
+                                <td>
+                                    {% if contact.postal_address %}
+                                        {{ contact.postal_address }}
+                                    {% else %}
+                                        <div class="text-gray">
+                                            None
+                                        </div>
+                                    {% endif %}
+                                </td>
+                        </tr>
 
-            <tr>
-              <th scope="row">Phone:</th>
-              <td>
-                {% if contact.phone_number %}
-                  {{ contact.phone_number }}
-                {% else %}
-                  <div class="text-gray">
-                    None
-                  </div>
-                {% endif %}
-              </td>
-            </tr>
+                        <tr>
+                            <th scope="row">Phone:</th>
+                            <td>
+                                {% if contact.phone_number %}
+                                    {{ contact.phone_number }}
+                                {% else %}
+                                    <div class="text-gray">
+                                        None
+                                    </div>
+                                {% endif %}
+                            </td>
+                        </tr>
 
-            <tr>
-              <th scope="row">Email:</th>
-              <td>
-                {% if contact.email_address %}
-                  {{ contact.email_address }}
-                {% else %}
-                  <div class="text-gray">
-                    None
-                  </div>
-                {% endif %}
-              </td>
-            </tr>
+                        <tr>
+                            <th scope="row">Email:</th>
+                            <td>
+                                {% if contact.email_address %}
+                                    {{ contact.email_address }}
+                                {% else %}
+                                    <div class="text-gray">
+                                        None
+                                    </div>
+                                {% endif %}
+                            </td>
+                        </tr>
 
-            <tr>
-              <th scope="row">LinkedIn:</th>
-              <td>
-                {% if contact.linkedin_url %}
-                  <a href="{{ contact.linkedin_url }}" target="_blank">{{ contact.linkedin_url }}</a>
-                {% else %}
-                  <div class="text-gray">
-                    None
-                  </div>
-                {% endif %}
-              </td>
-            </tr>
+                        <tr>
+                            <th scope="row">LinkedIn:</th>
+                            <td>
+                                {% if contact.linkedin_url %}
+                                    <a href="{{ contact.linkedin_url }}" target="_blank">{{ contact.linkedin_url }}</a>
+                                {% else %}
+                                    <div class="text-gray">
+                                        None
+                                    </div>
+                                {% endif %}
+                            </td>
+                        </tr>
 
-            <tr>
-              <th scope="row">Twitter:</th>
-              <td>
-                {% if contact.twitter_url %}
-                  <a href="{{ contact.twitter_url }}" target="_blank">{{ contact.twitter_url }}</a>
-                {% else %}
-                  <div class="text-gray">
-                    None
-                  </div>
-                {% endif %}
-              </td>
-            </tr>
+                        <tr>
+                            <th scope="row">Twitter:</th>
+                            <td>
+                                {% if contact.twitter_url %}
+                                    <a href="{{ contact.twitter_url }}" target="_blank">{{ contact.twitter_url }}</a>
+                                {% else %}
+                                    <div class="text-gray">
+                                        None
+                                    </div>
+                                {% endif %}
+                            </td>
+                        </tr>
 
-            <tr>
-              <th scope="row">GitHub:</th>
-              <td>
-                {% if contact.github_url %}
-                  <a href="{{ contact.github_url }}" target="_blank">{{ contact.github_url }}</a>
-                {% else %}
-                  <div class="text-gray">
-                    None
-                  </div>
-                {% endif %}
-              </td>
-            </tr>
+                        <tr>
+                            <th scope="row">GitHub:</th>
+                            <td>
+                                {% if contact.github_url %}
+                                    <a href="{{ contact.github_url }}" target="_blank">{{ contact.github_url }}</a>
+                                {% else %}
+                                    <div class="text-gray">
+                                        None
+                                    </div>
+                                {% endif %}
+                            </td>
+                        </tr>
 
-            <tr>
-              <th scope="row">Website:</th>
-              <td>
-                {% if contact.personal_website %}
-                  <a href="{{ contact.personal_website }}" target="_blank">{{ contact.personal_website }}</a>
-                {% else %}
-                  <div class="text-gray">
-                    None
-                  </div>
-                {% endif %}
-              </td>
-            </tr>
+                        <tr>
+                            <th scope="row">Website:</th>
+                            <td>
+                                {% if contact.personal_website %}
+                                    <a href="{{ contact.personal_website }}" target="_blank">{{ contact.personal_website }}</a>
+                                {% else %}
+                                    <div class="text-gray">
+                                        None
+                                    </div>
+                                {% endif %}
+                            </td>
+                        </tr>
 
-            <tr>
-              <th scope="row">Created:</th>
-              <td>
-                {{ contact.created_on }}
-              </td>
-            </tr>
+                        <tr>
+                            <th scope="row">Created:</th>
+                            <td>
+                                {{ contact.created_on }}
+                            </td>
+                        </tr>
 
-            <tr>
-              <th scope="row">Updated:</th>
-              <td>
-                {% if contact.last_modified_on %}
-                  {{ contact.last_modified_on }}
-                {% else %}
-                  <div class="text-gray">
-                    Never
-                  </div>
-                {% endif %}
-              </td>
-            </tr>
+                        <tr>
+                            <th scope="row">Updated:</th>
+                            <td>
+                                {% if contact.last_modified_on %}
+                                    {{ contact.last_modified_on }}
+                                {% else %}
+                                    <div class="text-gray">
+                                        Never
+                                    </div>
+                                {% endif %}
+                            </td>
+                        </tr>
 
-          </tbody>
-        </table>
+                    </tbody>
+                </table>
 
-        <div class="float-right pt-3">
-          <a class="btn btn-outline-primary" role="button" href="{% url 'contact_edit' contact.pk %}">Edit</a>
-          <a class="btn btn-outline-danger" role="button" href="{% url 'contact_delete' contact.pk %}">Delete</a>
-        </div>
+                <div class="float-right pt-3">
+                    <a class="btn btn-outline-primary" role="button" href="{% url 'contact_edit' contact.pk %}">Edit</a>
+                    <a class="btn btn-outline-danger" role="button" href="{% url 'contact_delete' contact.pk %}">Delete</a>
+                </div>
 
-      </div>
+            </div>
 
 
 
