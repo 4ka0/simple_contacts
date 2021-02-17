@@ -8,13 +8,12 @@
 
         <h4>New Contact</h4>
 
-        <form method="post" enctype="multipart/form-data">
+        <form method="post" enctype="multipart/form-data" id="formUpload">
             {% csrf_token %}
             {{ form|crispy }}
             <button type="submit" class="btn btn-outline-primary mr-3">Save</button>
+            <a class="btn btn-outline-primary" role="button" href="{% url 'contact_list' %}">Cancel</a>
         </form>
-
-        <a class="btn btn-outline-primary" role="button" href="{% url 'contact_list' %}">Cancel</a>
 
     </div>
 

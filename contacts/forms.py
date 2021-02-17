@@ -10,7 +10,6 @@ class ContactForm(forms.ModelForm):
         model = Contact
 
         fields = (
-            'profile_picture',
             'first_name',
             'last_name',
             'nickname',
@@ -21,4 +20,5 @@ class ContactForm(forms.ModelForm):
             'twitter_url',
             'github_url',
             'personal_website',
+            'profile_picture',
         )
