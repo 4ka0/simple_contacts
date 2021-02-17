@@ -2,7 +2,7 @@ from django.db import models
 from django.urls import reverse
 from django.utils import timezone
 
-from imagekit.models import ProcessedImageField, ImageSpecField
+from imagekit.models import ImageSpecField
 from imagekit.processors import SmartResize
 
 
