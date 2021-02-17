@@ -4,6 +4,7 @@
 
 {% block content %}
 
+    <!---
     <nav class="navbar mb-3">
         <form class="form-inline">
             <a href="{% url 'contact_alphabet' 'A' %}">A</a> &middot;
@@ -34,6 +35,9 @@
             <a href="{% url 'contact_alphabet' 'Z' %}">Z</a>
         </form>
     </nav>
+    -->
+
+
 
     <div class="table-responsive">
         <table class="table">
@@ -43,7 +47,7 @@
                 {% for contact in contacts %}
 
                     <tr>
-                        <td style="width: 10%">
+                        <td style="width: 18%">
                             {% if contact.thumbnail %}
                                 <a href="{% url 'contact_detail' contact.pk %}">
                                     <img src="{{ contact.thumbnail.url }}" alt="Profile picture" class="list-img" >
@@ -55,7 +59,7 @@
                             {% endif %}
                         </td>
 
-                        <td style="width: 60%" class="align-middle">
+                        <td style="width: 60%" class="align-middle pl-4">
                             <a href="{% url 'contact_detail' contact.pk %}">
                                 {{ contact.first_name }} {{ contact.last_name }}
                             </a>
@@ -66,12 +70,18 @@
                             {% endif %}
                         </td>
 
-                        <td style="width: 30%" class="align-middle">
+                        <td style="width: 11%" class="align-middle">
 
-                            <a class="btn btn-sm btn-outline-primary" role="button" href="{% url 'contact_edit' contact.pk %}">Edit</a>
-                            <a class="btn btn-sm btn-outline-danger" role="button" href="{% url 'contact_delete' contact.pk %}">Delete</a>
+                            <a href="{% url 'contact_edit' contact.pk %}"><i class="bi-pencil" style="font-size: 1.25rem;"></i></a></a>
 
                         </td>
+
+                        <td style="width: 11%" class="align-middle">
+
+                            <a href="{% url 'contact_delete' contact.pk %}"><i class="bi-x-circle" style="font-size: 1.25rem; color: orangered;"></i></a>
+
+                        </td>
+
                     </tr>
 
                 {% empty %}

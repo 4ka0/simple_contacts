@@ -4,20 +4,67 @@
 
 {% block content %}
 
-    <div class="table-responsive py-3">
+    <!-- Profile image -->
+    <div class="row">
+        <div class="col text-center">
+            {% if contact.thumbnail %}
+                <img src="{{ contact.thumbnail.url }}" alt="Profile picture" class="detail-img" >
+            {% else %}
+                <img src="{% static 'images/default_thumbnail.svg' %}" alt="Profile picture" class="detail-img" >
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Social media links -->
+    <div class="row">
+        <div class="col text-center mt-3 mb-2">
+
+            {% if contact.linkedin_url %}
+                <a href="{{ contact.linkedin_url }}" target="_blank">
+                    <i class="bi-linkedin" style="font-size: 1.5rem;"></i>
+                </a>
+                &nbsp &nbsp &nbsp
+            {% endif %}
+
+            {% if contact.twitter_url %}
+                <a href="{{ contact.twitter_url }}" target="_blank">
+                    <i class="bi-twitter" style="font-size: 1.5rem;"></i>
+                </a>
+                &nbsp &nbsp &nbsp
+            {% endif %}
+
+            {% if contact.github_url %}
+                <a href="{{ contact.github_url }}" target="_blank">
+                    <i class="bi-github" style="font-size: 1.5rem;"></i>
+                </a>
+                &nbsp &nbsp &nbsp
+            {% endif %}
+
+            {% if contact.personal_website %}
+                <a href="{{ contact.personal_website }}" target="_blank">
+                    <i class="bi-globe" style="font-size: 1.5rem;"></i>
+                </a>
+            {% endif %}
+
+        </div>
+    </div>
+
+    <!-- Edit / delete icons -->
+    <div class="row">
+        <div class="col text-center mt-3 mb-2">
+            <a href="{% url 'contact_edit' contact.pk %}">
+                <i class="bi-pencil" style="font-size: 1.5rem;"></i>
+            </a>
+            &nbsp &nbsp &nbsp
+            <a href="{% url 'contact_delete' contact.pk %}">
+                <i class="bi-x-circle" style="font-size: 1.5rem; color: orangered;"></i>
+            </a>
+        </div>
+    </div>
+
+    <div class="table-responsive mt-3 mb-2">
         <table class="table table-bordered">
             <tbody>
-
-                <tr>
-                    <th scope="row">Picture:</th>
-                    <td>
-                        {% if contact.thumbnail %}
-                            <img src="{{ contact.thumbnail.url }}" alt="Profile picture" class="detail-img" >
-                        {% else %}
-                            <img src="{% static 'images/default_thumbnail.svg' %}" alt="Profile picture" class="detail-img" >
-                        {% endif %}
-                    </td>
-                </tr>
 
                 <tr>
                     <th scope="row">Name:</th>
@@ -77,58 +124,6 @@
                 </tr>
 
                 <tr>
-                    <th scope="row">LinkedIn:</th>
-                    <td>
-                        {% if contact.linkedin_url %}
-                            <a href="{{ contact.linkedin_url }}" target="_blank">{{ contact.linkedin_url }}</a>
-                        {% else %}
-                            <div class="text-gray">
-                                None
-                            </div>
-                        {% endif %}
-                    </td>
-                </tr>
-
-                <tr>
-                    <th scope="row">Twitter:</th>
-                    <td>
-                        {% if contact.twitter_url %}
-                            <a href="{{ contact.twitter_url }}" target="_blank">{{ contact.twitter_url }}</a>
-                        {% else %}
-                            <div class="text-gray">
-                                None
-                            </div>
-                        {% endif %}
-                    </td>
-                </tr>
-
-                <tr>
-                    <th scope="row">GitHub:</th>
-                    <td>
-                        {% if contact.github_url %}
-                            <a href="{{ contact.github_url }}" target="_blank">{{ contact.github_url }}</a>
-                        {% else %}
-                            <div class="text-gray">
-                                None
-                            </div>
-                        {% endif %}
-                    </td>
-                </tr>
-
-                <tr>
-                    <th scope="row">Website:</th>
-                    <td>
-                        {% if contact.personal_website %}
-                            <a href="{{ contact.personal_website }}" target="_blank">{{ contact.personal_website }}</a>
-                        {% else %}
-                            <div class="text-gray">
-                                None
-                            </div>
-                        {% endif %}
-                    </td>
-                </tr>
-
-                <tr>
                     <th scope="row">Created:</th>
                     <td>
                         {{ contact.created_on }}
@@ -150,11 +145,6 @@
 
             </tbody>
         </table>
-
-        <div class="float-right pt-3">
-            <a class="btn btn-outline-primary" role="button" href="{% url 'contact_edit' contact.pk %}">Edit</a>
-            <a class="btn btn-outline-danger" role="button" href="{% url 'contact_delete' contact.pk %}">Delete</a>
-        </div>
 
     </div>
 

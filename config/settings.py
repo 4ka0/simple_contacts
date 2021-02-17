@@ -15,6 +15,12 @@ import os
 from pathlib import Path
 
 
+# Environment variables
+from environs import Env
+env = Env()
+env.read_env()
+
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -22,14 +28,16 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '1el#df_&e+0&wq_*!c6w4l@4)o2@+q65yofq423b0pvs9!*8*2'
+# env.str("SECRET_KEY")
 
-# SECURITY WARNING: don't run with debug turned on in production!
+SECRET_KEY = 'CTn9rjlZxpPl6s0sGHp0dwUv7-CRutn-892QbOc_D7w'
+# env.str("SECRET_KEY")
+
 DEBUG = True
+# env.bool("DEBUG")
 
-ALLOWED_HOSTS = ['*']
-
+ALLOWED_HOSTS = ['.herokuapp.com', 'localhost', '127.0.0.1']
+# env.list("ALLOWED_HOSTS")
 
 # Application definition
 
