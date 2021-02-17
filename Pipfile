@@ -11,8 +11,8 @@ django = "*"
 pylint-django = "*"
 django-crispy-forms = "*"
 pillow = "*"
-python-memcached = "*"
 pylint = "*"
+django-imagekit = "*"
 
 [requires]
 python_version = "3.9"

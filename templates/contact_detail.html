@@ -11,7 +11,11 @@
                 <tr>
                     <th scope="row">Picture:</th>
                     <td>
-                        <img src="{{ contact.get_profile_picture_url }}" alt="Profile picture" class="detail-img" >
+                        {% if contact.thumbnail %}
+                            <img src="{{ contact.thumbnail.url }}" alt="Profile picture" class="detail-img" >
+                        {% else %}
+                            <img src="{% static 'images/default_profile_image.svg' %}" alt="Profile picture" class="detail-img" >
+                        {% endif %}
                     </td>
                 </tr>
 

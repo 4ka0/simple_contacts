@@ -44,9 +44,15 @@
 
                     <tr>
                         <td style="width: 10%">
-                            <a href="{% url 'contact_detail' contact.pk %}">
-                                <img src="{{ contact.get_profile_picture_url }}" alt="Profile picture" class="list-img" >
-                            </a>
+                            {% if contact.thumbnail %}
+                                <a href="{% url 'contact_detail' contact.pk %}">
+                                    <img src="{{ contact.thumbnail.url }}" alt="Profile picture" class="list-img" >
+                                </a>
+                            {% else %}
+                                <a href="{% url 'contact_detail' contact.pk %}">
+                                    <img src="{% static 'images/default_profile_image.svg' %}" alt="Profile picture" class="list-img" >
+                                </a>
+                            {% endif %}
                         </td>
 
                         <td style="width: 60%" class="align-middle">

@@ -2,10 +2,20 @@ from django.db import models
 from django.urls import reverse
 from django.utils import timezone
 
+from imagekit.models import ProcessedImageField, ImageSpecField
+from imagekit.processors import SmartResize
+
 
 class Contact(models.Model):
 
     profile_picture = models.ImageField(upload_to='images/', blank=True)
+
+    thumbnail = ImageSpecField(
+        source='profile_picture',
+        processors=[SmartResize(200, 200)],
+        format='PNG',
+        options={'quality': 60}
+    )
 
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
@@ -31,10 +41,3 @@ class Contact(models.Model):
 
     def get_absolute_url(self):
         return reverse('contact_detail', args=[str(self.pk)])
-
-    @property
-    def get_profile_picture_url(self):
-        if self.profile_picture:
-            return self.profile_picture.url
-        else:
-            return '../static/images/default_profile_image.svg'
