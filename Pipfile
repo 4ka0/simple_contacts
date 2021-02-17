@@ -9,8 +9,10 @@ pylint = "*"
 [packages]
 django = "*"
 pylint-django = "*"
-django-image-cropping = "*"
-easy-thumbnails = "*"
+django-crispy-forms = "*"
+pillow = "*"
+python-memcached = "*"
+pylint = "*"
 
 [requires]
-python_version = "3.7"
+python_version = "3.9"

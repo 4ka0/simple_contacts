@@ -23,7 +23,7 @@ def contact_detail(request, pk):
 def contact_new(request):
 
     if request.method == "POST":
-        form = ContactForm(request.POST)
+        form = ContactForm(request.POST, request.FILES)
         if form.is_valid:
             contact = form.save()
             return redirect('contact_detail', pk=contact.pk)
@@ -37,7 +37,7 @@ def contact_edit(request, pk):
     contact = get_object_or_404(Contact, pk=pk)
 
     if request.method == "POST":
-        form = ContactForm(request.POST, instance=contact)
+        form = ContactForm(request.POST, request.FILES, instance=contact)
         if form.is_valid():
             contact = form.save(commit=False)
             contact.last_modified_on = timezone.now()

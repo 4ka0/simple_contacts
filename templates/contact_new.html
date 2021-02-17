@@ -1,17 +1,21 @@
 {% extends 'base.html' %}
 
-{% load cropping %}
+{% load crispy_forms_tags %}
 
 {% block content %}
 
     <div class="pb-3">
+
         <h4>New Contact</h4>
-        <form action="" method="POST">
+
+        <form method="post" enctype="multipart/form-data">
             {% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit">Save</button>
-            <a href="{% url 'contact_list' %}">Cancel</a>
+            {{ form|crispy }}
+            <button type="submit" class="btn btn-outline-primary mr-3">Save</button>
         </form>
+
+        <a class="btn btn-outline-primary" role="button" href="{% url 'contact_list' %}">Cancel</a>
+
     </div>
 
 {% endblock content %}
