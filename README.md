@@ -1,5 +1,7 @@
 # Simple Contacts
 
+(Current project)
+
 A simple contacts app built using Django.
 
 Essentially a self-study project for me to learn about handling images at the backend (user profile images in this case).
