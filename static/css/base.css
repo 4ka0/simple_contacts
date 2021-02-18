@@ -35,22 +35,18 @@
     flex-basis: 500px;
 }
 
-/* Unvisited link */
 a:link {
     color: #1C74F9;
     text-decoration: none;}
 
-/* Visited link */
 a:visited {
     color: #1C74F9;
 }
 
-/* Mouse over link */
 a:hover {
     color: #FC6644;
 }
 
-/* Selected link */
 a:active {
     color: #1C74F9;
 }
