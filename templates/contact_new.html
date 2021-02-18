@@ -6,13 +6,63 @@
 
     <div class="pb-3">
 
-        <h4>New Contact</h4>
+        <div class="text-center mt-4 mb-2">
+            <h5>Add Contact</h5>
+        </div>
 
-        <form method="post" enctype="multipart/form-data" id="formUpload">
+        <form method="post" enctype="multipart/form-data">
+
             {% csrf_token %}
-            {{ form|crispy }}
-            <button type="submit" class="btn btn-outline-primary mr-3">Save</button>
-            <a class="btn btn-outline-primary" role="button" href="{% url 'contact_list' %}">Cancel</a>
+
+            <div class="form-row my-2">
+                {{ form.first_name|as_crispy_field }}
+            </div>
+
+            <div class="form-row my-2">
+                {{ form.last_name|as_crispy_field }}
+            </div>
+
+            <div class="form-row my-2">
+                {{ form.nickname|as_crispy_field }}
+            </div>
+
+            <div class="form-row my-2">
+                {{ form.postal_address|as_crispy_field }}
+            </div>
+
+            <div class="form-row my-2">
+                {{ form.phone_number|as_crispy_field }}
+            </div>
+
+            <div class="form-row my-2">
+                {{ form.email_address|as_crispy_field }}
+            </div>
+
+            <div class="form-row my-2">
+                {{ form.linkedin_url|as_crispy_field }}
+            </div>
+
+            <div class="form-row my-2">
+                {{ form.twitter_url|as_crispy_field }}
+            </div>
+
+            <div class="form-row my-2">
+                {{ form.github_url|as_crispy_field }}
+            </div>
+
+            <div class="form-row my-2">
+                {{ form.personal_website|as_crispy_field }}
+            </div>
+
+            <div class="form-row my-2">
+                {{ form.profile_picture|as_crispy_field }}
+            </div>
+
+            <div class="text-center mt-4">
+                <button type="submit" class="btn btn-outline-primary mr-3">Save</button>
+                <a class="btn btn-outline-primary" role="button" href="{% url 'contact_list' %}">Cancel</a>
+            </div>
+
         </form>
 
     </div>

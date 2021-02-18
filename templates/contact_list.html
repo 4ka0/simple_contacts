@@ -4,39 +4,7 @@
 
 {% block content %}
 
-    <!---
-    <nav class="navbar mb-3">
-        <form class="form-inline">
-            <a href="{% url 'contact_alphabet' 'A' %}">A</a> &middot;
-            <a href="{% url 'contact_alphabet' 'B' %}">B</a> &middot;
-            <a href="{% url 'contact_alphabet' 'C' %}">C</a> &middot;
-            <a href="{% url 'contact_alphabet' 'D' %}">D</a> &middot;
-            <a href="{% url 'contact_alphabet' 'E' %}">E</a> &middot;
-            <a href="{% url 'contact_alphabet' 'F' %}">F</a> &middot;
-            <a href="{% url 'contact_alphabet' 'G' %}">G</a> &middot;
-            <a href="{% url 'contact_alphabet' 'H' %}">H</a> &middot;
-            <a href="{% url 'contact_alphabet' 'I' %}">I</a> &middot;
-            <a href="{% url 'contact_alphabet' 'J' %}">J</a> &middot;
-            <a href="{% url 'contact_alphabet' 'K' %}">K</a> &middot;
-            <a href="{% url 'contact_alphabet' 'L' %}">L</a> &middot;
-            <a href="{% url 'contact_alphabet' 'M' %}">M</a> &middot;
-            <a href="{% url 'contact_alphabet' 'N' %}">N</a> &middot;
-            <a href="{% url 'contact_alphabet' 'O' %}">O</a> &middot;
-            <a href="{% url 'contact_alphabet' 'P' %}">P</a> &middot;
-            <a href="{% url 'contact_alphabet' 'Q' %}">Q</a> &middot;
-            <a href="{% url 'contact_alphabet' 'R' %}">R</a> &middot;
-            <a href="{% url 'contact_alphabet' 'S' %}">S</a> &middot;
-            <a href="{% url 'contact_alphabet' 'T' %}">T</a> &middot;
-            <a href="{% url 'contact_alphabet' 'U' %}">U</a> &middot;
-            <a href="{% url 'contact_alphabet' 'V' %}">V</a> &middot;
-            <a href="{% url 'contact_alphabet' 'W' %}">W</a> &middot;
-            <a href="{% url 'contact_alphabet' 'X' %}">X</a> &middot;
-            <a href="{% url 'contact_alphabet' 'Y' %}">Y</a> &middot;
-            <a href="{% url 'contact_alphabet' 'Z' %}">Z</a>
-        </form>
-    </nav>
-    -->
-
+    <!-- Alphabetic search button group -->
     <div class="text-center">
         <div class="btn-group my-2" role="group" aria-label="Aplhabet-based group search buttons">
             <a href="{% url 'contact_list' %}" class="btn btn-sm btn-outline-primary">All</a>
@@ -48,6 +16,7 @@
         </div>
     </div>
 
+    <!-- Table containing relevant contacts -->
     <div class="table-responsive mt-4">
         <table class="table">
 
@@ -80,15 +49,11 @@
                         </td>
 
                         <td style="width: 11%" class="align-middle">
-
                             <a href="{% url 'contact_edit' contact.pk %}"><i class="bi-pencil" style="font-size: 1.25rem;"></i></a></a>
-
                         </td>
 
                         <td style="width: 11%" class="align-middle">
-
                             <a href="{% url 'contact_delete' contact.pk %}"><i class="bi-x-circle" style="font-size: 1.25rem; color: orangered;"></i></a>
-
                         </td>
 
                     </tr>
