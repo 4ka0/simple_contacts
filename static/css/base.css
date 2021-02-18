@@ -1,5 +1,10 @@
-html {
+.main-bg {
     background-color: #F8F9FA;
+}
+
+.banner-text {
+    color: #1C74F9;
+    font-size: 135%;
 }
 
 .list-img {
@@ -24,6 +29,29 @@ html {
     color:#BBBBBB;
 }
 
-.navbar-color {
-    background-color: #FFFFFF;
+.fix-width {
+    flex-grow: 0;
+    flex-shrink: 0;
+    flex-basis: 500px;
 }
+
+/* Unvisited link */
+a:link {
+    color: #1C74F9;
+    text-decoration: none;
+  }
+
+  /* Visited link */
+  a:visited {
+    color: #1C74F9;
+  }
+
+  /* Mouse over link */
+  a:hover {
+    color: #FC6644;
+  }
+
+  /* Selected link */
+  a:active {
+    color: #1C74F9;
+  }

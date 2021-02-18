@@ -37,9 +37,18 @@
     </nav>
     -->
 
+    <div class="text-center">
+        <div class="btn-group my-2" role="group" aria-label="Aplhabet-based group search buttons">
+            <a href="{% url 'contact_list' %}" class="btn btn-sm btn-outline-primary">All</a>
+            <a href="{% url 'contact_alphabet' 'A-E' %}" class="btn btn-sm btn-outline-primary">A - E</a>
+            <a href="{% url 'contact_alphabet' 'F-J' %}" class="btn btn-sm btn-outline-primary">F - J</a>
+            <a href="{% url 'contact_alphabet' 'K-O' %}" class="btn btn-sm btn-outline-primary">K - O</a>
+            <a href="{% url 'contact_alphabet' 'P-T' %}" class="btn btn-sm btn-outline-primary">P - T</a>
+            <a href="{% url 'contact_alphabet' 'U-Z' %}" class="btn btn-sm btn-outline-primary">U - Z</a>
+        </div>
+    </div>
 
-
-    <div class="table-responsive">
+    <div class="table-responsive mt-4">
         <table class="table">
 
             <tbody>
@@ -86,7 +95,7 @@
 
                 {% empty %}
 
-                    <div class="alert alert-info" role="alert">
+                    <div class="alert alert-info mt-3" role="alert">
                         No contacts found.
                     </div>
 

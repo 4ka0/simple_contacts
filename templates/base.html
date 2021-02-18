@@ -17,22 +17,31 @@
 
     <title>Contacts</title>
 </head>
-<body>
-    <main class="main-background mb-5">
+<body class="main-bg">
+    <main>
 
-        <div class="container">
+        <!-- Main container -->
+        <div class="container mb-5">
             <div class="row justify-content-center">
-                <div class="col-5 px-5 py-4 mt-5 rounded bg-white outline">
+                <div class="col-5 bg-white rounded outline fix-width px-5 py-4 mt-5">
 
-                    <nav class="navbar my-3">
-                        <div class="col text-center">
-                            <a class="btn btn-outline-primary" role="button" href="{% url 'contact_list' %}">All Contacts</a>
-                        </div>
-                        <div class="col text-center">
-                            <a class="btn btn-outline-primary" role="button" href="{% url 'contact_new' %}">New Contact</a>
+                    <!-- Navbar container-->
+                    <nav class="navbar navbar-light bg-light rounded outline my-3">
+                        <div class="container-fluid">
+
+                            <!-- Navbar heading-->
+                            <div class="banner-text">
+                                <a href="{% url 'contact_list' %}">Simple Contacts</a>
+                            </div>
+
+                                <!-- Add contact button-->
+                                <a href="{% url 'contact_new' %}">
+                                    <i class="bi-person-plus" style="font-size: 1.5rem;"></i>
+                                </a>
                         </div>
                     </nav>
 
+                    <!-- Main content -->
                     {% block content %}
                     {% endblock content %}
 

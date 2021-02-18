@@ -1,17 +1,66 @@
 from django.utils import timezone
 from django.shortcuts import render, redirect, get_object_or_404
+from django.db.models import Q
 
 from .models import Contact
 from .forms import ContactForm
 
 
 def contact_list(request):
-    contacts = Contact.objects.all()
+    contacts = Contact.objects.order_by('first_name')
     return render(request, 'contact_list.html', {'contacts': contacts})
 
 
-def contact_alphabet(request, letter):
-    contacts = Contact.objects.filter(first_name__istartswith=letter)
+def contact_alphabet(request, letters):
+
+    if letters == 'A-E':
+        contacts = Contact.objects.filter(
+            Q(first_name__startswith='A') |
+            Q(first_name__startswith='B') |
+            Q(first_name__startswith='C') |
+            Q(first_name__startswith='D') |
+            Q(first_name__startswith='E')
+        )
+
+    elif letters == 'F-J':
+        contacts = Contact.objects.filter(
+            Q(first_name__startswith='F') |
+            Q(first_name__startswith='G') |
+            Q(first_name__startswith='H') |
+            Q(first_name__startswith='I') |
+            Q(first_name__startswith='J')
+        )
+
+    elif letters == 'K-O':
+        contacts = Contact.objects.filter(
+            Q(first_name__startswith='K') |
+            Q(first_name__startswith='L') |
+            Q(first_name__startswith='M') |
+            Q(first_name__startswith='N') |
+            Q(first_name__startswith='O')
+        )
+
+    elif letters == 'P-T':
+        contacts = Contact.objects.filter(
+            Q(first_name__startswith='P') |
+            Q(first_name__startswith='Q') |
+            Q(first_name__startswith='R') |
+            Q(first_name__startswith='S') |
+            Q(first_name__startswith='T')
+        )
+
+    else:
+        contacts = Contact.objects.filter(
+            Q(first_name__startswith='U') |
+            Q(first_name__startswith='V') |
+            Q(first_name__startswith='W') |
+            Q(first_name__startswith='X') |
+            Q(first_name__startswith='Z') |
+            Q(first_name__startswith='Y')
+        )
+
+    contacts = contacts.order_by('first_name')
+
     return render(request, 'contact_list.html', {'contacts': contacts})
 
 

@@ -6,7 +6,7 @@
 
     <!-- Profile image -->
     <div class="row">
-        <div class="col text-center">
+        <div class="col text-center mt-3">
             {% if contact.thumbnail %}
                 <img src="{{ contact.thumbnail.url }}" alt="Profile picture" class="detail-img" >
             {% else %}
@@ -17,7 +17,7 @@
 
     <!-- Social media links -->
     <div class="row">
-        <div class="col text-center mt-3 mb-2">
+        <div class="col text-center my-2">
 
             {% if contact.linkedin_url %}
                 <a href="{{ contact.linkedin_url }}" target="_blank">
