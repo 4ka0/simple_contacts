@@ -15,67 +15,26 @@
         </div>
     </div>
 
-    <!-- Social media links -->
-    <div class="row">
-        <div class="col text-center my-2">
-
-            {% if contact.linkedin_url %}
-                <a href="{{ contact.linkedin_url }}" target="_blank">
-                    <i class="bi-linkedin" style="font-size: 1.5rem;"></i>
-                </a>
-                &nbsp &nbsp &nbsp
-            {% endif %}
-
-            {% if contact.twitter_url %}
-                <a href="{{ contact.twitter_url }}" target="_blank">
-                    <i class="bi-twitter" style="font-size: 1.5rem;"></i>
-                </a>
-                &nbsp &nbsp &nbsp
-            {% endif %}
-
-            {% if contact.github_url %}
-                <a href="{{ contact.github_url }}" target="_blank">
-                    <i class="bi-github" style="font-size: 1.5rem;"></i>
-                </a>
-                &nbsp &nbsp &nbsp
-            {% endif %}
-
-            {% if contact.personal_website %}
-                <a href="{{ contact.personal_website }}" target="_blank">
-                    <i class="bi-globe" style="font-size: 1.5rem;"></i>
-                </a>
-            {% endif %}
-
-        </div>
+    <!-- Names -->
+    <div class="text-center mt-4 mb-4">
+        <h5>{{ contact.first_name }} {{ contact.last_name }}</h5>
+        {% if contact.nickname %}
+            <h5><span class="text-gray">({{ contact.nickname }})</span></h5>
+        {% endif %}
     </div>
 
-    <!-- Edit / delete icons -->
-    <div class="row">
-        <div class="col text-center mt-3 mb-2">
-            <a href="{% url 'contact_edit' contact.pk %}">
-                <i class="bi-pencil" style="font-size: 1.5rem;"></i>
-            </a>
-            &nbsp &nbsp &nbsp
-            <a href="{% url 'contact_delete' contact.pk %}">
-                <i class="bi-x-circle" style="font-size: 1.5rem; color: orangered;"></i>
-            </a>
-        </div>
-    </div>
-
-    <div class="table-responsive mt-3 mb-2">
+    <!-- Contact details table -->
+    <div class="table-responsive my-3">
         <table class="table table-bordered">
             <tbody>
 
                 <tr>
-                    <th scope="row">Name:</th>
-                    <td>{{ contact.first_name }} {{ contact.last_name }}</td>
-                </tr>
-
-                <tr>
-                    <th scope="row">Nickname:</th>
-                    <td>
-                        {% if contact.nickname %}
-                            {{ contact.nickname }}
+                    <th class="detail-table-col-1 align-middle text-center" scope="row">
+                        <i class="bi bi-geo-alt-fill icon-large"></i>
+                    </th>
+                    <td class="detail-table-col-2 align-middle">
+                        {% if contact.postal_address %}
+                            {{ contact.postal_address }}
                         {% else %}
                             <div class="text-gray">
                                 None
@@ -85,21 +44,10 @@
                 </tr>
 
                 <tr>
-                    <th scope="row">Address:</th>
-                        <td>
-                            {% if contact.postal_address %}
-                                {{ contact.postal_address }}
-                            {% else %}
-                                <div class="text-gray">
-                                    None
-                                </div>
-                            {% endif %}
-                        </td>
-                </tr>
-
-                <tr>
-                    <th scope="row">Phone:</th>
-                    <td>
+                    <th class="detail-table-col-1 align-middle text-center" scope="row">
+                        <i class="bi bi-telephone-fill icon-large"></i>
+                    </th>
+                    <td class="detail-table-col-2 align-middle">
                         {% if contact.phone_number %}
                             {{ contact.phone_number }}
                         {% else %}
@@ -111,8 +59,10 @@
                 </tr>
 
                 <tr>
-                    <th scope="row">Email:</th>
-                    <td>
+                    <th class="detail-table-col-1 align-middle text-center" scope="row">
+                        <i class="bi bi-envelope-fill icon-large"></i>
+                    </th>
+                    <td class="detail-table-col-2 align-middle">
                         {% if contact.email_address %}
                             {{ contact.email_address }}
                         {% else %}
@@ -124,20 +74,68 @@
                 </tr>
 
                 <tr>
-                    <th scope="row">Created:</th>
-                    <td>
-                        {{ contact.created_on }}
+                    <th class="detail-table-col-1 align-middle text-center" scope="row">
+                        <i class="bi bi-linkedin icon-large"></i>
+                    </th>
+                    <td class="detail-table-col-2 align-middle">
+                        {% if contact.linkedin_url %}
+                            <a href="{{ contact.linkedin_url }}" target="_blank">
+                                {{ contact.linkedin_url }}
+                            </a>
+                        {% else %}
+                            <div class="text-gray">
+                                None
+                            </div>
+                        {% endif %}
                     </td>
                 </tr>
 
                 <tr>
-                    <th scope="row">Updated:</th>
-                    <td>
-                        {% if contact.last_modified_on %}
-                            {{ contact.last_modified_on }}
+                    <th class="detail-table-col-1 align-middle text-center" scope="row">
+                        <i class="bi bi-twitter icon-large"></i>
+                    </th>
+                    <td class="detail-table-col-2 align-middle">
+                        {% if contact.twitter_url %}
+                            <a href="{{ contact.twitter_url }}" target="_blank">
+                                {{ contact.twitter_url }}
+                            </a>
                         {% else %}
                             <div class="text-gray">
-                                Never
+                                None
+                            </div>
+                        {% endif %}
+                    </td>
+                </tr>
+
+                <tr>
+                    <th class="detail-table-col-1 align-middle text-center" scope="row">
+                        <i class="bi bi-github icon-large"></i>
+                    </th>
+                    <td class="detail-table-col-2 align-middle">
+                        {% if contact.github_url %}
+                            <a href="{{ contact.github_url }}" target="_blank">
+                                {{ contact.github_url }}
+                            </a>
+                        {% else %}
+                            <div class="text-gray">
+                                None
+                            </div>
+                        {% endif %}
+                    </td>
+                </tr>
+
+                <tr>
+                    <th class="detail-table-col-1 align-middle text-center" scope="row">
+                        <i class="bi bi-globe icon-large"></i>
+                    </th>
+                    <td class="detail-table-col-2 align-middle">
+                        {% if contact.personal_website %}
+                            <a href="{{ contact.personal_website }}" target="_blank">
+                                {{ contact.personal_website }}
+                                </a>
+                        {% else %}
+                            <div class="text-gray">
+                                None
                             </div>
                         {% endif %}
                     </td>
@@ -146,6 +144,26 @@
             </tbody>
         </table>
 
+        <div class="text-center mt-4">
+            <p>
+                <span class="text-gray">Created: {{ contact.created_on }}</span>
+            </p>
+
+            <p>
+                {% if contact.last_modified_on %}
+                    <span class="text-gray">Last updated: {{ contact.last_modified_on }}</span>
+                {% endif %}
+            </p>
+        </div>
+
+    </div>
+
+    <!-- Edit / delete buttons -->
+
+    <div class="text-center my-3">
+        <a class="btn btn-outline-primary" href="{% url 'contact_edit' contact.pk %}">Update</a>
+        &nbsp
+        <a class="btn btn-outline-danger text-red" href="{% url 'contact_delete' contact.pk %}">Delete</a>
     </div>
 
 {% endblock content %}

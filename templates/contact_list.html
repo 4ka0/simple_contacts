@@ -6,7 +6,7 @@
 
     <!-- Alphabetic search button group -->
     <div class="text-center">
-        <div class="btn-group my-2" role="group" aria-label="Aplhabet-based group search buttons">
+        <div class="btn-group mt-2" role="group" aria-label="Aplhabet-based group search buttons">
             <a href="{% url 'contact_list' %}" class="btn btn-sm btn-outline-primary">All</a>
             <a href="{% url 'contact_alphabet' 'A-E' %}" class="btn btn-sm btn-outline-primary">A - E</a>
             <a href="{% url 'contact_alphabet' 'F-J' %}" class="btn btn-sm btn-outline-primary">F - J</a>
@@ -17,7 +17,7 @@
     </div>
 
     <!-- Table containing relevant contacts -->
-    <div class="table-responsive mt-4">
+    <div class="table-responsive mt-5">
         <table class="table">
 
             <tbody>
@@ -25,7 +25,7 @@
                 {% for contact in contacts %}
 
                     <tr>
-                        <td style="width: 18%">
+                        <td class="list-table-col-1">
                             {% if contact.thumbnail %}
                                 <a href="{% url 'contact_detail' contact.pk %}">
                                     <img src="{{ contact.thumbnail.url }}" alt="Profile picture" class="list-img" >
@@ -37,7 +37,7 @@
                             {% endif %}
                         </td>
 
-                        <td style="width: 60%" class="align-middle pl-4">
+                        <td class="list-table-col-2 align-middle pl-4">
                             <a href="{% url 'contact_detail' contact.pk %}">
                                 {{ contact.first_name }} {{ contact.last_name }}
                             </a>
@@ -48,12 +48,12 @@
                             {% endif %}
                         </td>
 
-                        <td style="width: 11%" class="align-middle">
-                            <a href="{% url 'contact_edit' contact.pk %}"><i class="bi-pencil" style="font-size: 1.25rem;"></i></a></a>
+                        <td class="list-table-col-3 align-middle">
+                            <a href="{% url 'contact_edit' contact.pk %}"><i class="bi-pencil icon-large"></i></a></a>
                         </td>
 
                         <td style="width: 11%" class="align-middle">
-                            <a href="{% url 'contact_delete' contact.pk %}"><i class="bi-x-circle" style="font-size: 1.25rem; color: orangered;"></i></a>
+                            <a href="{% url 'contact_delete' contact.pk %}"><i class="bi-x-circle icon-large icon-orange"></i></a>
                         </td>
 
                     </tr>
@@ -67,7 +67,6 @@
                 {% endfor %}
 
             </tbody>
-
         </table>
     </div>
 

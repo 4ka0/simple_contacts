@@ -38,20 +38,75 @@
 /* Unvisited link */
 a:link {
     color: #1C74F9;
-    text-decoration: none;
-  }
+    text-decoration: none;}
 
-  /* Visited link */
-  a:visited {
+/* Visited link */
+a:visited {
     color: #1C74F9;
-  }
+}
 
-  /* Mouse over link */
-  a:hover {
+/* Mouse over link */
+a:hover {
     color: #FC6644;
-  }
+}
 
-  /* Selected link */
-  a:active {
+/* Selected link */
+a:active {
     color: #1C74F9;
-  }
+}
+
+td {
+    word-wrap: break-word;
+}
+
+table {
+    table-layout: fixed;
+}
+
+.detail-table-col-1 {
+    width: 15%;
+}
+
+.detail-table-col-2 {
+    width: 85%;
+}
+
+.list-table-col-1 {
+    width: 20%;
+}
+
+.list-table-col-2 {
+    width: 68%;
+}
+
+.list-table-col-3 {
+    width: 12%;
+}
+
+.delete-table-col-1 {
+    width: 30%;
+}
+
+.delete-table-col-2 {
+    width: 70%;
+}
+
+.icon-vlarge {
+    font-size: 1.5rem;
+}
+
+.icon-large {
+    font-size: 1.25rem;
+}
+
+.icon-orange {
+    color: #FF4400;
+}
+
+a.text-red {
+    color: #DA3749;
+}
+
+tbody > tr:last-child > td {
+    border-bottom: 0;
+}

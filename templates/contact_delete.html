@@ -1,27 +1,184 @@
 {% extends 'base.html' %}
 
+{% load static %}
+
 {% block content %}
 
     <div class="pb-3">
-        <h4>Delete Contact</h4>
+
+        <div class="text-center my-5">
+            <h5>Delete Contact</h5>
+            <p>Are you sure you want to delete the following contact?</p>
+        </div>
+
         <form action="" method="POST">
             {% csrf_token %}
-            <p>Are you sure you want to the following contact?</p>
-            <ul>
-                <li><strong>First name: </strong>{{ contact.first_name }}</li>
-                <li><strong>Last name: </strong>{{ contact.last_name }}</li>
-                <li><strong>Nickname: </strong>{{ contact.nickname }}</li>
-                <li><strong>Address: </strong>{{ contact.postal_address }}</li>
-                <li><strong>Phone: </strong>{{ contact.phone_number }}</li>
-                <li><strong>Email: </strong>{{ contact.email_address }}</li>
-                <li><strong>LinkedIn: </strong>{{ contact.linkedin_url }}</li>
-                <li><strong>Twitter: </strong>{{ contact.twitter_url }}</li>
-                <li><strong>Website: </strong>{{ contact.personal_website }}</li>
-                <li><strong>Created: </strong>{{ contact.created_on }}</li>
-                <li><strong>Last modified: </strong>{{ contact.last_modified_on }}</li>
-            </ul>
-            <button type="submit">Confirm</button>
-            <a href="{% url 'contact_list' %}">Cancel</a>
+
+            <!-- Contact details table -->
+            <div class="table-responsive my-3">
+                <table class="table table-bordered">
+                    <tbody>
+
+                        <tr>
+                            <th class="delete-table-col-1 align-middle text-center" scope="row">
+                                Avatar:
+                            </th>
+                            <td class="delete-table-col-2">
+                                {% if contact.thumbnail %}
+                                    <img src="{{ contact.thumbnail.url }}" alt="Profile picture" class="detail-img" >
+                                {% else %}
+                                    <img src="{% static 'images/default_thumbnail.svg' %}" alt="Profile picture" class="detail-img" >
+                                {% endif %}
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <th class="delete-table-col-1 align-middle text-center" scope="row">
+                                Name:
+                            </th>
+                            <td class="delete-table-col-2">
+                                {{ contact.first_name }} {{ contact.last_name }}
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <th class="delete-table-col-1 align-middle text-center" scope="row">
+                                Nickname:
+                            </th>
+                            <td class="delete-table-col-2">
+                                {% if contact.nickname %}
+                                    {{ contact.nickname }}
+                                {% else %}
+                                    <div class="text-gray">
+                                        None
+                                    </div>
+                                {% endif %}
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <th class="delete-table-col-1 align-middle text-center" scope="row">
+                                <i class="bi bi-geo-alt-fill icon-large"></i>
+                            </th>
+                            <td class="delete-table-col-2">
+                                {% if contact.postal_address %}
+                                    {{ contact.postal_address }}
+                                {% else %}
+                                    <div class="text-gray">
+                                        None
+                                    </div>
+                                {% endif %}
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <th class="delete-table-col-1 align-middle text-center" scope="row">
+                                <i class="bi bi-telephone-fill icon-large"></i>
+                            </th>
+                            <td class="delete-table-col-2">
+                                {% if contact.phone_number %}
+                                    {{ contact.phone_number }}
+                                {% else %}
+                                    <div class="text-gray">
+                                        None
+                                    </div>
+                                {% endif %}
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <th class="delete-table-col-1 align-middle text-center" scope="row">
+                                <i class="bi bi-envelope-fill icon-large"></i>
+                            </th>
+                            <td class="delete-table-col-2">
+                                {% if contact.email_address %}
+                                    {{ contact.email_address }}
+                                {% else %}
+                                    <div class="text-gray">
+                                        None
+                                    </div>
+                                {% endif %}
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <th class="delete-table-col-1 align-middle text-center" scope="row">
+                                <i class="bi bi-linkedin icon-large"></i>
+                            </th>
+                            <td class="delete-table-col-2">
+                                {% if contact.linkedin_url %}
+                                    <a href="{{ contact.linkedin_url }}" target="_blank">
+                                        {{ contact.linkedin_url }}
+                                    </a>
+                                {% else %}
+                                    <div class="text-gray">
+                                        None
+                                    </div>
+                                {% endif %}
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <th class="delete-table-col-1 align-middle text-center" scope="row">
+                                <i class="bi bi-twitter icon-large"></i>
+                            </th>
+                            <td class="delete-table-col-2">
+                                {% if contact.twitter_url %}
+                                    <a href="{{ contact.twitter_url }}" target="_blank">
+                                        {{ contact.twitter_url }}
+                                    </a>
+                                {% else %}
+                                    <div class="text-gray">
+                                        None
+                                    </div>
+                                {% endif %}
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <th class="delete-table-col-1 align-middle text-center" scope="row">
+                                <i class="bi bi-github icon-large"></i>
+                            </th>
+                            <td class="delete-table-col-2">
+                                {% if contact.github_url %}
+                                    <a href="{{ contact.github_url }}" target="_blank">
+                                        {{ contact.github_url }}
+                                    </a>
+                                {% else %}
+                                    <div class="text-gray">
+                                        None
+                                    </div>
+                                {% endif %}
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <th class="delete-table-col-1 align-middle text-center" scope="row">
+                                <i class="bi bi-globe icon-large"></i>
+                            </th>
+                            <td class="delete-table-col-2">
+                                {% if contact.personal_website %}
+                                    <a href="{{ contact.personal_website }}" target="_blank">
+                                        {{ contact.personal_website }}
+                                        </a>
+                                {% else %}
+                                    <div class="text-gray">
+                                        None
+                                    </div>
+                                {% endif %}
+                            </td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="text-center mt-3">
+                <button type="submit" class="btn btn-outline-danger mr-3">Delete</button>
+                &nbsp
+                <a class="btn btn-outline-primary" href="{% url 'contact_detail' contact.pk %}">Cancel</a>
+            </div>
+
         </form>
     </div>
 
