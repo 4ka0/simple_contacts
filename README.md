@@ -37,11 +37,11 @@ class Contact(models.Model):
 
 ### Screenshots:
 
-List view:</br>
+#### List view:</br>
 <img src="screenshot-1.png" width="600"></br>
 
-Detail view:</br>
+#### Detail view:</br>
 <img src="screenshot-2.png" width="600"></br>
 
-Delete view:</br>
+#### Delete view:</br>
 <img src="screenshot-3.png" width="600"></br>
