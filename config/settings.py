@@ -16,9 +16,7 @@ from pathlib import Path
 
 
 # Environment variables
-from environs import Env
-env = Env()
-env.read_env()
+from decouple import config, Csv
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -28,16 +26,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
-# env.str("SECRET_KEY")
+SECRET_KEY = config('SECRET_KEY')
 
-SECRET_KEY = 'CTn9rjlZxpPl6s0sGHp0dwUv7-CRutn-892QbOc_D7w'
-# env.str("SECRET_KEY")
+DEBUG = config('DEBUG', cast=bool)
 
-DEBUG = True
-# env.bool("DEBUG")
-
-# ALLOWED_HOSTS = ['.herokuapp.com', 'localhost', '127.0.0.1']
-env.list("ALLOWED_HOSTS")
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=Csv())
 
 # Application definition
 

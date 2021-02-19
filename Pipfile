@@ -13,7 +13,7 @@ django-crispy-forms = "*"
 pillow = "*"
 pylint = "*"
 django-imagekit = "*"
-environs = "*"
+python-decouple = "*"
 
 [requires]
 python_version = "3.9"
