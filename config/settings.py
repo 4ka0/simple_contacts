@@ -36,8 +36,8 @@ SECRET_KEY = 'CTn9rjlZxpPl6s0sGHp0dwUv7-CRutn-892QbOc_D7w'
 DEBUG = True
 # env.bool("DEBUG")
 
-ALLOWED_HOSTS = ['.herokuapp.com', 'localhost', '127.0.0.1']
-# env.list("ALLOWED_HOSTS")
+# ALLOWED_HOSTS = ['.herokuapp.com', 'localhost', '127.0.0.1']
+env.list("ALLOWED_HOSTS")
 
 # Application definition
 
