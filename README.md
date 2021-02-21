@@ -1,6 +1,6 @@
 # Simple Contacts
 
-(Current project)
+(Current project - not yet deployed)
 
 A simple contacts app built using Django.
 
