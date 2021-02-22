@@ -29,9 +29,7 @@ INSTALLED_APPS = [
     # Third-party
     'crispy_forms',
     'imagekit',
-    # 'storages',
     'django_s3_storage',
-
 ]
 
 MIDDLEWARE = [
@@ -130,4 +128,3 @@ AWS_S3_KEY_PREFIX = 'media'  # creates a 'media' folder in the bucket
 
 # Additional locations the staticfiles app will traverse with collectstatic
 STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
-
