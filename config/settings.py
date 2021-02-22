@@ -29,7 +29,9 @@ INSTALLED_APPS = [
     # Third-party
     'crispy_forms',
     'imagekit',
-    'storages',
+    # 'storages',
+    'django_s3_storage',
+
 ]
 
 MIDDLEWARE = [
@@ -107,22 +109,24 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 # Static and media settings
 
 # AWS settings
+AWS_REGION = config('AWS_REGION')
 AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY')
-AWS_STORAGE_BUCKET_NAME = config('AWS_STORAGE_BUCKET_NAME')
-AWS_DEFAULT_ACL = None
-AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
-AWS_S3_OBJECT_PARAMETERS = {'CacheControl': 'max-age=86400'}
+AWS_S3_BUCKET_NAME = config('AWS_S3_BUCKET_NAME')
+AWS_S3_CUSTOM_DOMAIN = f'{AWS_S3_BUCKET_NAME}.s3.amazonaws.com'
 
 # S3 static settings
 STATIC_LOCATION = 'static'
 STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{STATIC_LOCATION}/'
-STATICFILES_STORAGE = 'config.storage_backends.StaticStorage'
+STATICFILES_STORAGE = 'django_s3_storage.storage.StaticS3Storage'
+AWS_S3_BUCKET_NAME_STATIC = config('AWS_S3_BUCKET_NAME_STATIC')
+AWS_S3_KEY_PREFIX_STATIC = 'static'  # creates a 'static' folder in the bucket
 
 # S3 public media settings
-PUBLIC_MEDIA_LOCATION = 'media'
-MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{PUBLIC_MEDIA_LOCATION}/'
-DEFAULT_FILE_STORAGE = 'config.storage_backends.PublicMediaStorage'
+DEFAULT_FILE_STORAGE = 'django_s3_storage.storage.S3Storage'
+AWS_S3_BUCKET_AUTH = False  # makes media files public
+AWS_S3_MAX_AGE_SECONDS = 60 * 60 * 24 * 365  # enables caching for one year
+AWS_S3_KEY_PREFIX = 'media'  # creates a 'media' folder in the bucket
 
 # Additional locations the staticfiles app will traverse with collectstatic
 STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
