@@ -16,6 +16,7 @@ django-imagekit = "*"
 python-decouple = "*"
 django-s3-storage = "*"
 boto3 = "*"
+freezegun = "*"
 
 [requires]
 python_version = "3.9"
