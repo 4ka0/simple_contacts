@@ -1,55 +1,60 @@
 from django.test import TestCase, SimpleTestCase
 
-from accounts.forms import CustomUserCreationForm, CustomUserUpdateForm
+from contacts.forms import ContactForm
 
 
 class CustomUserCreationFormTests(TestCase):
-    def test_custom_user_creation_form_field_labels(self):
-        form = CustomUserCreationForm()
-        self.assertTrue(
-            form.fields["username"].label == "Username"
-            or form.fields["username"].label == None
-        )
-        self.assertTrue(
-            form.fields["first_name"].label == "First name"
-            or form.fields["first_name"].label == None
-        )
-        self.assertTrue(
-            form.fields["last_name"].label == "Last name"
-            or form.fields["last_name"].label == None
-        )
-        self.assertTrue(
-            form.fields["position"].label == "Position"
-            or form.fields["position"].label == None
-        )
-        self.assertTrue(
-            form.fields["email"].label == "Email"
-            or form.fields["email"].label == None
-        )
 
-    def test_custom_user_creation_form_required_fields(self):
-        form = CustomUserCreationForm()
-        self.assertTrue(form.fields["username"].required)
+    def test_contact_form_field_labels(self):
+        form = ContactForm()
+        self.assertTrue(form.fields["first_name"].label == "First name")
+        self.assertTrue(form.fields["last_name"].label == "Last name")
+        self.assertTrue(form.fields["nickname"].label == "Nickname")
+        self.assertTrue(form.fields["postal_address"].label == "Postal address")
+        self.assertTrue(form.fields["phone_number"].label == "Phone number")
+        self.assertTrue(form.fields["email_address"].label == "Email address")
+        self.assertTrue(form.fields["linkedin_url"].label == "LinkedIn URL")
+        self.assertTrue(form.fields["twitter_url"].label == "Twitter URL")
+        self.assertTrue(form.fields["github_url"].label == "GitHub URL")
+        self.assertTrue(form.fields["personal_website"].label == "Personal website")
+        self.assertTrue(form.fields["profile_picture"].label == "Profile picture")
+
+    def test_contact_form_required_fields(self):
+        form = ContactForm()
         self.assertTrue(form.fields["first_name"].required)
         self.assertTrue(form.fields["last_name"].required)
-        self.assertTrue(form.fields["position"].required)
-        self.assertTrue(form.fields["email"].required)
+        self.assertFalse(form.fields["nickname"].required)
+        self.assertFalseform.fields["postal_address"].required)
+        self.assertFalse(form.fields["phone_number"].required)
+        self.assertFalse(form.fields["email_address"].required)
+        self.assertFalse(form.fields["linkedin_url"].required)
+        self.assertFalse(form.fields["twitter_url"].required)
+        self.assertFalse(form.fields["github_url"].required)
+        self.assertFalse(form.fields["personal_website"].required)
+        self.assertFalse(form.fields["profile_picture"].required)
 
-    def test_custom_user_creation_form_field_maxlengths(self):
-        form = CustomUserCreationForm()
-        self.assertTrue(form.fields["first_name"].max_length == 150)
-        self.assertTrue(form.fields["last_name"].max_length == 150)
+    def test_contact_form_field_maxlengths(self):
+        form = ContactForm()
+        self.assertTrue(form.fields["first_name"].max_length == 50)
+        self.assertTrue(form.fields["last_name"].max_length == 50)
+        self.assertTrue(form.fields["nickname"].max_length == 50)
+        self.assertTrue(form.fields["postal_address"].max_length == 200)
+        self.assertTrue(form.fields["phone_number"].max_length == 50)
+        self.assertTrue(form.fields["email_address"].max_length == 200)
 
     def test_custom_user_creation_form_when_valid(self):
-        form = CustomUserCreationForm(
+        form = ContactForm(
             {
-                "username": "testuser",
-                "email": "testuser@email.com",
-                "first_name": "Test",
-                "last_name": "User",
-                "position": "Tester",
-                "password1": "testpassword",
-                "password2": "testpassword",
+                'first_name': "Test",
+                'last_name: "User",
+                'nickname': "Tester",
+                'postal_address': "23 Test Avenue, Test Road, Testville, Testshire, TS3 3TY, UK",
+                'phone_number': "080-1236-9874",
+                'email_address': "testuser@email.com",
+                'linkedin_url': "https://www.linkedin.com/testuser",
+                'twitter_url': "https://www.twitter.com/testuser",
+                'github_url': "https://www.github.com/testuser",
+                'personal_website': "https://www.testuser.net",
             }
         )
 
@@ -58,148 +63,55 @@ class CustomUserCreationFormTests(TestCase):
         self.assertEqual(form.errors, {})
         self.assertEqual(form.errors.as_text(), "")
 
-        self.assertEqual(form.cleaned_data["username"], "testuser")
-        self.assertEqual(form.cleaned_data["email"], "testuser@email.com")
         self.assertEqual(form.cleaned_data["first_name"], "Test")
         self.assertEqual(form.cleaned_data["last_name"], "User")
-        self.assertEqual(form.cleaned_data["position"], "Tester")
-        self.assertEqual(form.cleaned_data["password1"], "testpassword")
-        self.assertEqual(form.cleaned_data["password2"], "testpassword")
+        self.assertEqual(form.cleaned_data["nickname"], "Tester")
+        self.assertEqual(form.cleaned_data["postal_address"], "23 Test Avenue, Test Road, Testville, Testshire, TS3 3TY, UK")
+        self.assertEqual(form.cleaned_data["phone_number"], "080-1236-9874")
+        self.assertEqual(form.cleaned_data["email_address"], "testuser@email.com")
+        self.assertEqual(form.cleaned_data["linkedin_url"], "https://www.linkedin.com/testuser")
+        self.assertEqual(form.cleaned_data["twitter_url"], "https://www.twitter.com/testuser")
+        self.assertEqual(form.cleaned_data["github_url"], "https://www.github.com/testuser")
+        self.assertEqual(form.cleaned_data["personal_website"], "https://www.testuser.net")
 
         # Check bound data
+
         form_output = []
 
         for boundfield in form:
             form_output.append([boundfield.label, boundfield.data])
 
         expected_output = [
-            ["Username", "testuser"],
-            ["First name", "Test"],
-            ["Last name", "User"],
-            ["Position", "Tester"],
-            ["Email", "testuser@email.com"],
-            ["Password", "testpassword"],
-            ["Password confirmation", "testpassword"],
+            ["first_name", "Test"],
+            ["last_name", "User"],
+            ["nickname", "Tester"],
+            ["postal_address", "23 Test Avenue, Test Road, Testville, Testshire, TS3 3TY, UK"],
+            ["phone_number", "080-1236-9874"],
+            ["email_address", "testuser@email.com"],
+            ["linkedin_url", "https://www.linkedin.com/testuser"],
+            ["twitter_url", "https://www.twitter.com/testuser"],
+            ["github_url", "https://www.github.com/testuser"],
+            ["personal_website", "https://www.testuser.net"],
         ]
 
         self.assertEqual(form_output, expected_output)
 
     def test_custom_user_creation_form_when_empty(self):
-        form = CustomUserCreationForm()
+        form = ContactForm()
         self.assertFalse(form.is_bound)
+        # Should be an empty dictionary as validation is not carried out
         self.assertEqual(
             form.errors, {}
-        )  # Should be an empty dictionary as validation is not carried out.
+        )
         self.assertFalse(form.is_valid())
         with self.assertRaises(AttributeError):
             form.cleaned_data
 
     def test_custom_user_creation_form_when_partially_empty(self):
-        form = CustomUserCreationForm(
-            {"username": "testuser", "email": "testuser@email.com"}
+        form = ContactForm(
+            {"nickname": "Tester", "email": "testuser@email.com"}
         )
-        self.assertEqual(
-            form.errors["first_name"], ["This field is required."]
-        )
+        self.assertEqual(form.errors["first_name"], ["This field is required."])
         self.assertEqual(form.errors["last_name"], ["This field is required."])
-        self.assertEqual(form.errors["position"], ["This field is required."])
-        self.assertEqual(form.errors["password1"], ["This field is required."])
-        self.assertEqual(form.errors["password2"], ["This field is required."])
         self.assertFalse(form.is_valid())
 
-
-class CustomUserUpdateFormTests(TestCase):
-    def test_custom_user_update_form_field_labels(self):
-        form = CustomUserUpdateForm()
-        self.assertTrue(
-            form.fields["username"].label == "Username"
-            or form.fields["username"].label == None
-        )
-        self.assertTrue(
-            form.fields["first_name"].label == "First name"
-            or form.fields["first_name"].label == None
-        )
-        self.assertTrue(
-            form.fields["last_name"].label == "Last name"
-            or form.fields["last_name"].label == None
-        )
-        self.assertTrue(
-            form.fields["position"].label == "Position"
-            or form.fields["position"].label == None
-        )
-        self.assertTrue(
-            form.fields["email"].label == "Email"
-            or form.fields["email"].label == None
-        )
-
-    def test_custom_user_update_form_required_fields(self):
-        form = CustomUserUpdateForm()
-        self.assertTrue(form.fields["username"].required)
-        self.assertTrue(form.fields["first_name"].required)
-        self.assertTrue(form.fields["last_name"].required)
-        self.assertTrue(form.fields["position"].required)
-        self.assertTrue(form.fields["email"].required)
-
-    def test_custom_user_update_form_field_maxlengths(self):
-        form = CustomUserUpdateForm()
-        self.assertTrue(form.fields["first_name"].max_length == 150)
-        self.assertTrue(form.fields["last_name"].max_length == 150)
-
-    def test_custom_user_update_form_when_valid(self):
-        form = CustomUserUpdateForm(
-            {
-                "username": "testuser",
-                "email": "testuser@email.com",
-                "first_name": "Test",
-                "last_name": "User",
-                "position": "Tester",
-            }
-        )
-
-        self.assertTrue(form.is_bound)
-        self.assertTrue(form.is_valid())
-        self.assertEqual(form.errors, {})
-        self.assertEqual(form.errors.as_text(), "")
-
-        self.assertEqual(form.cleaned_data["username"], "testuser")
-        self.assertEqual(form.cleaned_data["email"], "testuser@email.com")
-        self.assertEqual(form.cleaned_data["first_name"], "Test")
-        self.assertEqual(form.cleaned_data["last_name"], "User")
-        self.assertEqual(form.cleaned_data["position"], "Tester")
-
-        # Check bound data
-        form_output = []
-
-        for boundfield in form:
-            form_output.append([boundfield.label, boundfield.data])
-
-        expected_output = [
-            ["Username", "testuser"],
-            ["First name", "Test"],
-            ["Last name", "User"],
-            ["Position", "Tester"],
-            ["Email", "testuser@email.com"],
-        ]
-
-        self.assertEqual(form_output, expected_output)
-
-    def test_custom_user_update_form_when_empty(self):
-        form = CustomUserUpdateForm()
-        self.assertFalse(form.is_bound)
-        self.assertEqual(
-            form.errors, {}
-        )  # Should be an empty dictionary as validation is not carried out.
-        self.assertFalse(form.is_valid())
-        with self.assertRaises(AttributeError):
-            form.cleaned_data
-
-    def test_custom_user_update_form_when_partially_empty(self):
-        form = CustomUserUpdateForm(
-            {"username": "testuser", "email": "testuser@email.com"}
-        )
-        self.assertEqual(
-            form.errors["first_name"], ["This field is required."]
-        )
-        self.assertEqual(form.errors["last_name"], ["This field is required."])
-        self.assertEqual(form.errors["position"], ["This field is required."])
-        self.assertFalse(form.is_valid())

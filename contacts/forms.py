@@ -22,3 +22,9 @@ class ContactForm(forms.ModelForm):
             'personal_website',
             'profile_picture',
         )
+
+        labels = {
+            "linkedin_url": "LinkedIn URL",
+            "twitter_url": "Twitter URL",
+            "github_url": "GitHub URL",
+        }

@@ -1,11 +1,16 @@
 from django.test import TestCase
 from django.contrib.auth import get_user_model
 from django.utils import timezone
+from django.core.files.uploadedfile import SimpleUploadedFile
+
+from freezegun import freeze_time
+from imagekit.models import ImageSpecField
+from imagekit.processors import SmartResize
 
 from contacts.models import Contact
 
-from freezegun import freeze_time
 
+# need to check using an image and a thumbnail
 
 class ContactModelTest(TestCase):
 
@@ -24,6 +29,19 @@ class ContactModelTest(TestCase):
             personal_website="https://www.testuser.com",
             created_on="testuser@email.com",
             last_modified_on="testuser@email.com",
+
+            profile_picture = SimpleUploadedFile(
+                name='test_image.svg',
+                content=open('test_image.svg', 'rb').read(),
+                content_type='image/svg'
+            )
+
+            thumbnail = ImageSpecField(
+                source='profile_picture',
+                processors=[SmartResize(200, 200)],
+                format='PNG',
+                options={'quality': 60}
+            )
         )
 
     # Test field labels
@@ -87,6 +105,11 @@ class ContactModelTest(TestCase):
         contact = Contact.objects.get(id=1)
         field_label = contact._meta.get_field("last_modified_on").verbose_name
         self.assertEqual(field_label, "last modified on")
+
+    def test_profile_picture_label(self):
+        contact = Contact.objects.get(id=1)
+        field_label = contact._meta.get_field("profile_picture").verbose_name
+        self.assertEqual(field_label, "profile picture")
 
     # Test field max_lengths
 
@@ -178,6 +201,15 @@ class ContactModelTest(TestCase):
             datetime.strftime(contact.last_modified_on, "%Y-%m-%d %H:%M:%S")
             "2020-02-25 14:38:00"
         )
+
+    def test_profile_picture():
+        # check exists
+        pass
+
+    def test_thumbnail():
+        # check exists
+        # check size
+        pass
 
     # Test class methods
 
