@@ -1,11 +1,6 @@
 from django.test import TestCase
 from django.contrib.auth import get_user_model
 from django.utils import timezone
-from django.core.files.uploadedfile import SimpleUploadedFile
-
-from freezegun import freeze_time
-from imagekit.models import ImageSpecField
-from imagekit.processors import SmartResize
 
 from contacts.models import Contact
 
@@ -17,31 +12,19 @@ class ContactModelTest(TestCase):
     @classmethod
     def setUpTestData(cls):
         Contact.objects.create(
+
             first_name="Test",
             last_name="User",
             nickname="Tester",
+
             postal_address="23 Test Avenue, Test Road, Testville, Testshire, TS3 3TY, UK",
             phone_number="090-8745-2365",
             email_address="testuser@email.com",
+
             linkedin_url="https://www.linkedin.com/testuser",
             twitter_url="https://www.twitter.com/testuser",
             github_url="https://www.github.com/testuser",
             personal_website="https://www.testuser.com",
-            created_on="testuser@email.com",
-            last_modified_on="testuser@email.com",
-
-            profile_picture = SimpleUploadedFile(
-                name='test_image.svg',
-                content=open('test_image.svg', 'rb').read(),
-                content_type='image/svg'
-            )
-
-            thumbnail = ImageSpecField(
-                source='profile_picture',
-                processors=[SmartResize(200, 200)],
-                format='PNG',
-                options={'quality': 60}
-            )
         )
 
     # Test field labels
@@ -101,16 +84,6 @@ class ContactModelTest(TestCase):
         field_label = contact._meta.get_field("created_on").verbose_name
         self.assertEqual(field_label, "created on")
 
-    def test_personal_website_label(self):
-        contact = Contact.objects.get(id=1)
-        field_label = contact._meta.get_field("last_modified_on").verbose_name
-        self.assertEqual(field_label, "last modified on")
-
-    def test_profile_picture_label(self):
-        contact = Contact.objects.get(id=1)
-        field_label = contact._meta.get_field("profile_picture").verbose_name
-        self.assertEqual(field_label, "profile picture")
-
     # Test field max_lengths
 
     def test_first_name_max_length(self):
@@ -125,7 +98,7 @@ class ContactModelTest(TestCase):
 
     def test_nickname_max_length(self):
         contact = Contact.objects.get(id=1)
-        max_length = contact._meta.get_field("name_name").max_length
+        max_length = contact._meta.get_field("nickname").max_length
         self.assertEqual(max_length, 50)
 
     def test_postal_address_max_length(self):
@@ -143,13 +116,8 @@ class ContactModelTest(TestCase):
         max_length = contact._meta.get_field("email_address").max_length
         self.assertEqual(max_length, 200)
 
-    # Test object created correctly
-
     def test_object_instatiation(self):
         contact = Contact.objects.get(id=1)
-
-        self.assertEqual(get_user_model().objects.all().count(), 1)
-        self.assertNotEqual(get_user_model().objects.all().count(), 0)
 
         self.assertEqual(contact.first_name, "Test")
         self.assertNotEqual(contact.first_name, "")
@@ -181,41 +149,9 @@ class ContactModelTest(TestCase):
         self.assertEqual(contact.personal_website, "https://www.testuser.com")
         self.assertNotEqual(contact.personal_website, "")
 
-    @freeze_time("2020-02-25 14:38:00")
-    def test_created_on_date(self):
-        contact = Contact.objects.get(id=1)
-        self.assertEqual(
-            datetime.strftime(contact.created_on, "%Y-%m-%d %H:%M:%S")
-            "2020-02-25 14:38:00"
-        )
-
-    def test_last_modified_on_date_after_creation(self):
-        contact = Contact.objects.get(id=1)
-        self.assertEqual(contact.last_modified_on, None)  # Should be None when object created
-
-    @freeze_time("2020-02-25 14:38:00")
-    def test_last_modified_on_date_after_modification(self):
-        contact = Contact.objects.get(id=1)
-        contact.last_modified_on = timezone.now()
-        self.assertEqual(
-            datetime.strftime(contact.last_modified_on, "%Y-%m-%d %H:%M:%S")
-            "2020-02-25 14:38:00"
-        )
-
-    def test_profile_picture():
-        # check exists
-        pass
-
-    def test_thumbnail():
-        # check exists
-        # check size
-        pass
-
-    # Test class methods
-
     def test_get_absolute_url(self):
         contact = Contact.objects.get(id=1)
-        self.assertEqual(contact.get_absolute_url(), '/1')
+        self.assertEqual(contact.get_absolute_url(), '/1/')
 
     def test_str_representation(self):
         contact = Contact.objects.get(id=1)
