@@ -25,9 +25,9 @@
 
                     <tr>
                         <td class="list-table-col-1">
-                            {% if contact.thumbnail %}
+                            {% if contact.profile_picture %}
                                 <a href="{% url 'contact_detail' contact.pk %}">
-                                    <img src="{{ contact.thumbnail.url }}" alt="Profile picture" class="list-img" >
+                                    <img src="{{ contact.profile_picture.url }}" alt="Profile picture" class="list-img" >
                                 </a>
                             {% else %}
                                 <a href="{% url 'contact_detail' contact.pk %}">

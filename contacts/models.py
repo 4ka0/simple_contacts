@@ -2,20 +2,27 @@ from django.db import models
 from django.urls import reverse
 from django.utils import timezone
 
-from imagekit.models import ImageSpecField
-from imagekit.processors import SmartResize
+from io import BytesIO
+from PIL import Image, ImageOps
+
+from django.core.files.storage import default_storage
+
+# from imagekit.models import ImageSpecField
+# from imagekit.processors import SmartResize
 
 
 class Contact(models.Model):
 
     profile_picture = models.ImageField(upload_to='images/', blank=True)
 
+    """
     thumbnail = ImageSpecField(
         source='profile_picture',
         processors=[SmartResize(200, 200)],
         format='PNG',
         options={'quality': 60}
     )
+    """
 
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
@@ -41,3 +48,33 @@ class Contact(models.Model):
 
     def get_absolute_url(self):
         return reverse('contact_detail', args=[str(self.pk)])
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+
+        if self.profile_picture:
+            raw_img = Image.open(self.profile_picture)
+            corrected_img = ImageOps.exif_transpose(raw_img)
+            square_img = self.crop_max_square(corrected_img)
+            if square_img.height != 300:
+                square_img = square_img.resize((300, 300), Image.LANCZOS)
+            memfile = BytesIO()
+            square_img.save(memfile, 'JPEG', quality=75)
+            default_storage.save(self.profile_picture.name, memfile)
+            memfile.close()
+
+
+    def crop_center(self, img, crop_width, crop_height):
+        img_width, img_height = img.size
+        cropped_img = img.crop((
+            (img_width - crop_width) // 2,
+            (img_height - crop_height) // 2,
+            (img_width + crop_width) // 2,
+            (img_height + crop_height) // 2
+        ))
+        return cropped_img
+
+
+    def crop_max_square(self, img):
+        max_square = self.crop_center(img, min(img.size), min(img.size))
+        return max_square
