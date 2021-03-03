@@ -51,7 +51,6 @@ class Contact(models.Model):
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
-
         if self.profile_picture:
             raw_img = Image.open(self.profile_picture)
             corrected_img = ImageOps.exif_transpose(raw_img)
