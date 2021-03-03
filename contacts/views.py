@@ -89,7 +89,11 @@ def contact_edit(request, pk):
         form = ContactForm(request.POST, request.FILES, instance=contact)
         if form.is_valid():
             contact = form.save(commit=False)
+            # Update last_modified date
             contact.last_modified_on = timezone.now()
+            # Delete thumbnail if profile picture has been cleared
+            if not form.cleaned_data.get("profile_picture"):
+                contact.thumbnail = None
             contact.save()
             return redirect('contact_detail', pk=contact.pk)
 

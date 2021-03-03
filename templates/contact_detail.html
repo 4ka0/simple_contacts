@@ -7,8 +7,8 @@
     <!-- Profile image -->
     <div class="row">
         <div class="col text-center mt-3">
-            {% if contact.profile_picture %}
-                <img src="{{ contact.profile_picture.url }}" alt="Profile picture" class="detail-img" >
+            {% if contact.thumbnail %}
+                <img src="{{ contact.thumbnail.url }}" alt="Profile picture" class="detail-img" >
             {% else %}
                 <img src="{% static 'images/default_thumbnail.svg' %}" alt="Profile picture" class="detail-img" >
             {% endif %}
