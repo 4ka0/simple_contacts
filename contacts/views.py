@@ -1,3 +1,5 @@
+import os
+
 from django.utils import timezone
 from django.shortcuts import render, redirect, get_object_or_404
 from django.db.models import Q
@@ -86,15 +88,24 @@ def contact_edit(request, pk):
     contact = get_object_or_404(Contact, pk=pk)
 
     if request.method == "POST":
+
         form = ContactForm(request.POST, request.FILES, instance=contact)
+
         if form.is_valid():
-            contact = form.save(commit=False)
-            # Update last_modified date
-            contact.last_modified_on = timezone.now()
-            # Delete thumbnail if profile picture has been cleared
+
+            contact = form.save(commit=False)  # Provides unsaved model object
+
+            # Images deleted if profile picture has been cleared
+            """
             if not form.cleaned_data.get("profile_picture"):
-                contact.thumbnail = None
+                contact.profile_picture.delete()
+                contact.thumbnail.delete()
+            """
+
+            contact.last_modified_on = timezone.now()
+
             contact.save()
+
             return redirect('contact_detail', pk=contact.pk)
 
     else:

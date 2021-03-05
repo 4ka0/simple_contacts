@@ -6,25 +6,14 @@ from django.core.files import File
 from io import BytesIO
 from PIL import Image, ImageOps
 
-from django.core.files.storage import default_storage
-
-# from imagekit.models import ImageSpecField
-# from imagekit.processors import SmartResize
+from django.db.models.signals import post_delete, pre_save
+from django.dispatch.dispatcher import receiver
 
 
 class Contact(models.Model):
 
     profile_picture = models.ImageField(upload_to='images/', blank=True)
     thumbnail = models.ImageField(upload_to='images/', blank=True)
-
-    """
-    thumbnail = ImageSpecField(
-        source='profile_picture',
-        processors=[SmartResize(200, 200)],
-        format='PNG',
-        options={'quality': 60}
-    )
-    """
 
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
@@ -89,3 +78,14 @@ class Contact(models.Model):
     def crop_max_square(self, img):
         max_square = self.crop_center(img, min(img.size), min(img.size))
         return max_square
+
+
+@receiver(post_delete, sender=Contact)
+def delete_images_from_S3(sender, instance, **kwargs):
+    """
+    'post_delete' model signal used to delete associated images from the
+    S3 bucket when a contact is deleted. 'False' here ensures that the model
+    is not saved after the image in question has been deleted.
+    """
+    instance.profile_picture.delete(False)
+    instance.thumbnail.delete(False)
