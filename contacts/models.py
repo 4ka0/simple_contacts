@@ -6,14 +6,11 @@ from django.core.files import File
 from io import BytesIO
 from PIL import Image, ImageOps
 
-from django.db.models.signals import post_delete, pre_save
-from django.dispatch.dispatcher import receiver
-
 
 class Contact(models.Model):
 
-    profile_picture = models.ImageField(upload_to='images/', blank=True)
-    thumbnail = models.ImageField(upload_to='images/', blank=True)
+    profile_picture = models.ImageField(upload_to='images/', blank=True, null=True)
+    thumbnail = models.ImageField(upload_to='images/', blank=True, null=True)
 
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
@@ -56,7 +53,7 @@ class Contact(models.Model):
                 square_img = square_img.resize((200, 200), Image.LANCZOS)
 
             # Save thumbnail
-            thumb_io = BytesIO()
+            thumb_io = BytesIO()  # Should this be closed?
             square_img.save(thumb_io, raw_img.format, quality=75)
             thumbnail = File(thumb_io, name=self.profile_picture.name)
             self.thumbnail = thumbnail
@@ -64,28 +61,20 @@ class Contact(models.Model):
         super().save(*args, **kwargs)
 
 
-    def crop_center(self, img, crop_width, crop_height):
+    def crop_max_square(self, img):
+        """
+        Crops the largest possible square from the center of an image.
+        """
         img_width, img_height = img.size
+
+        crop_width = min(img.size)
+        crop_height = min(img.size)
+
         cropped_img = img.crop((
             (img_width - crop_width) // 2,
             (img_height - crop_height) // 2,
             (img_width + crop_width) // 2,
             (img_height + crop_height) // 2
         ))
+
         return cropped_img
-
-
-    def crop_max_square(self, img):
-        max_square = self.crop_center(img, min(img.size), min(img.size))
-        return max_square
-
-
-@receiver(post_delete, sender=Contact)
-def delete_images_from_S3(sender, instance, **kwargs):
-    """
-    'post_delete' model signal used to delete associated images from the
-    S3 bucket when a contact is deleted. 'False' here ensures that the model
-    is not saved after the image in question has been deleted.
-    """
-    instance.profile_picture.delete(False)
-    instance.thumbnail.delete(False)

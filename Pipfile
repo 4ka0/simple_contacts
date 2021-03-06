@@ -17,6 +17,7 @@ python-decouple = "*"
 django-s3-storage = "*"
 boto3 = "*"
 freezegun = "*"
+django-cleanup = "*"
 
 [requires]
 python_version = "3.7"

@@ -84,35 +84,6 @@ def contact_new(request):
     return render(request, 'contact_new.html', {'form': form})
 
 
-def contact_edit(request, pk):
-    contact = get_object_or_404(Contact, pk=pk)
-
-    if request.method == "POST":
-
-        form = ContactForm(request.POST, request.FILES, instance=contact)
-
-        if form.is_valid():
-
-            contact = form.save(commit=False)  # Provides unsaved model object
-
-            # Images deleted if profile picture has been cleared
-            """
-            if not form.cleaned_data.get("profile_picture"):
-                contact.profile_picture.delete()
-                contact.thumbnail.delete()
-            """
-
-            contact.last_modified_on = timezone.now()
-
-            contact.save()
-
-            return redirect('contact_detail', pk=contact.pk)
-
-    else:
-        form = ContactForm(instance=contact)
-    return render(request, 'contact_edit.html', {'form': form})
-
-
 def contact_delete(request, pk):
     contact = get_object_or_404(Contact, pk=pk)
 
@@ -121,3 +92,24 @@ def contact_delete(request, pk):
         return redirect('contact_list')
 
     return render(request, 'contact_delete.html', {'contact': contact})
+
+
+def contact_edit(request, pk):
+    contact = get_object_or_404(Contact, pk=pk)
+
+    if request.method == 'POST':
+        form = ContactForm(request.POST, request.FILES, instance=contact)
+        if form.is_valid():
+            contact = form.save(commit=False)  # Provides unsaved model object
+
+            # Delete associated thumbnail if profile picture has been cleared
+            if not form.cleaned_data.get('profile_picture'):
+                contact.thumbnail.delete()
+
+            contact.last_modified_on = timezone.now()
+            contact.save()
+            return redirect('contact_detail', pk=contact.pk)
+
+    else:
+        form = ContactForm(instance=contact)
+    return render(request, 'contact_edit.html', {'form': form})

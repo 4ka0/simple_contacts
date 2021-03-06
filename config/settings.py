@@ -28,8 +28,8 @@ INSTALLED_APPS = [
 
     # Third-party
     'crispy_forms',
-    'imagekit',
     'django_s3_storage',
+    'django_cleanup.apps.CleanupConfig',
 ]
 
 MIDDLEWARE = [
@@ -128,7 +128,3 @@ AWS_S3_KEY_PREFIX = 'media'  # creates a 'media' folder in the bucket
 
 # Additional locations the staticfiles app will traverse with collectstatic
 STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
-
-# To stop image-kit checking S3 constantly to see if cached image exists
-# IMAGEKIT_DEFAULT_CACHEFILE_STRATEGY = 'imagekit.cachefiles.strategies.Optimistic'
-# IMAGEKIT_CACHE_TIMEOUT = None
