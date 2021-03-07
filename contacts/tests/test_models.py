@@ -1,11 +1,10 @@
 from django.test import TestCase
 from django.contrib.auth import get_user_model
 from django.utils import timezone
+from django.core.files.uploadedfile import SimpleUploadedFile
 
 from contacts.models import Contact
 
-
-# need to check using an image and a thumbnail
 
 class ContactModelTest(TestCase):
 
@@ -27,7 +26,7 @@ class ContactModelTest(TestCase):
             personal_website="https://www.testuser.com",
         )
 
-    # Test field labels
+    # Test field labels rendered correctly
 
     def test_first_name_label(self):
         contact = Contact.objects.get(id=1)
@@ -84,7 +83,7 @@ class ContactModelTest(TestCase):
         field_label = contact._meta.get_field("created_on").verbose_name
         self.assertEqual(field_label, "created on")
 
-    # Test field max_lengths
+    # Test max lengths implemented correctly
 
     def test_first_name_max_length(self):
         contact = Contact.objects.get(id=1)
@@ -116,7 +115,9 @@ class ContactModelTest(TestCase):
         max_length = contact._meta.get_field("email_address").max_length
         self.assertEqual(max_length, 200)
 
-    def test_object_instatiation(self):
+    # Test instance created correctly
+
+    def test_object_creation_without_image(self):
         contact = Contact.objects.get(id=1)
 
         self.assertEqual(contact.first_name, "Test")
@@ -149,11 +150,35 @@ class ContactModelTest(TestCase):
         self.assertEqual(contact.personal_website, "https://www.testuser.com")
         self.assertNotEqual(contact.personal_website, "")
 
-    def test_get_absolute_url(self):
-        contact = Contact.objects.get(id=1)
-        self.assertEqual(contact.get_absolute_url(), '/1/')
+    # Test class methods
 
     def test_str_representation(self):
         contact = Contact.objects.get(id=1)
         expected_object_name = f'{contact.first_name} {contact.last_name}'
         self.assertEqual(expected_object_name, str(contact))
+
+    def test_get_absolute_url(self):
+        contact = Contact.objects.get(id=1)
+        self.assertEqual(contact.get_absolute_url(), '/1/')
+
+    def test_contact_with_profile_picture(self):
+        # This uploads the file to S3 !!!
+        # Check out the following guide
+        # https://dirtycoder.net/2016/02/09/testing-a-model-that-have-an-imagefield/
+        contact = Contact.objects.get(id=1)
+        contact.profile_picture = SimpleUploadedFile(
+            name='test_image.jpeg',
+            content=open('./contacts/tests/test_image.jpeg', 'rb').read(),
+            content_type='image/jpeg'
+        )
+        contact.save()
+        self.assertTrue(contact.profile_picture)
+        self.assertEqual(contact.profile_picture.name, 'images/test_image.jpeg')
+
+    def test_crop_max_square(self):
+        # create pillow Image object
+        # pass to actual crop_max_square()
+        # check size of cropped output
+        pass
+
+
