@@ -2,7 +2,7 @@
 
 A simple contacts management app built using Django.
 
-[Live demo](https://jjl-simple-contacts.herokuapp.com)
+[Live demo](https://jjl-simple-contacts.herokuapp.com)<br>
 (Hosted on the Heroku free tier so it takes a little time to spin up.)
 
 This was essentially a self-study project for me to learn about handling user-uploaded images at the backend (user profile images in this case).
