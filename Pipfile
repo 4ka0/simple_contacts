@@ -18,6 +18,7 @@ django-s3-storage = "*"
 boto3 = "*"
 freezegun = "*"
 django-cleanup = "*"
+gunicorn = "*"
 
 [requires]
 python_version = "3.7"
