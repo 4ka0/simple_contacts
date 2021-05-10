@@ -128,3 +128,5 @@ AWS_S3_KEY_PREFIX = 'media'  # creates a 'media' folder in the bucket
 
 # Additional locations the staticfiles app will traverse with collectstatic
 STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
+
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
