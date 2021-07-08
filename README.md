@@ -2,10 +2,6 @@
 
 A simple contacts management app built using Django.
 
-[Live demo](https://jjl-simple-contacts.herokuapp.com) 
-
-(May take a little time to spin up as it's hosted on the Heroku free tier.)
-
 This was essentially a self-study project for me to learn about handling user-uploaded images at the backend (user profile images in this case).
 
 I wanted to restrict the size of user profile images to speed up page-loading, and I also wanted to control the dimensions of images so as to have more control over the look of the page.  For these reasons I wanted to dynamically crop and resize images without the user having to specify an anchor point for the image cropping.  For this I initially opted to use the **django-imagekit** library and its **SmartResize processor** class which automatically selects the most interesting section of an image based on the entropy of the image (I’m not sure how it does this but it works quite well).
