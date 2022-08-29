@@ -162,9 +162,8 @@ class ContactModelTest(TestCase):
         self.assertEqual(contact.get_absolute_url(), '/1/')
 
     def test_contact_with_profile_picture(self):
-        # This uploads the file to S3 !!!
-        # Check out the following guide
-        # https://dirtycoder.net/2016/02/09/testing-a-model-that-have-an-imagefield/
+        # This actually uploads the file to S3.
+        # Refactor this test to avoid this.
         contact = Contact.objects.get(id=1)
         contact.profile_picture = SimpleUploadedFile(
             name='test_image.jpeg',
